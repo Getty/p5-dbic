@@ -50,7 +50,7 @@ BEGIN {
         and
       @caller
         and
-      $caller[0] =~ /^DBIC/
+      $caller[0] =~ /^DBIC::/
         and
       (caller($up))[3] =~ /\Q$caller[0]/
     ) {
