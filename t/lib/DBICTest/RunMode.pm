@@ -121,6 +121,9 @@ EOE
 #
 sub _check_author_makefile {
 
+  # DBIC: Module::Install checks disabled — migrating to Dist::Zilla
+  return;
+
   my $root = _find_co_root()
     or return;
 

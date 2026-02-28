@@ -77,7 +77,7 @@ if ($PHASE eq 'all' or $PHASE eq 'move') {
   my @class_files;
   if (-d "$ROOT/lib/$FROM_DIR") {
     find(sub {
-      return unless -f && /\.(pm|pod)$/;
+      return unless -f && /\.(pm|pod(\.proto)?)$/;
       push @class_files, $File::Find::name;
     }, "$ROOT/lib/$FROM_DIR");
   }
@@ -99,7 +99,7 @@ if ($PHASE eq 'all' or $PHASE eq 'move') {
   if (-d "$ROOT/lib/SQL/Translator/Producer/$FROM_DIR") {
     my @producer_files;
     find(sub {
-      return unless -f && /\.(pm|pod)$/;
+      return unless -f && /\.(pm|pod(\.proto)?)$/;
       push @producer_files, $File::Find::name;
     }, "$ROOT/lib/SQL/Translator/Producer/$FROM_DIR");
 
