@@ -71,8 +71,8 @@ my $sql_maker = $schema->storage->sql_maker;
 # 'READ'|'SHARE' is tested in db-specific subclasses
 # we have to instantiate base because SQLMaker::SQLite disables _lock_select
 {
-  require DBIx::Class::SQLMaker;
-  my $sa = DBIx::Class::SQLMaker->new;
+  require DBIC::SQLMaker;
+  my $sa = DBIC::SQLMaker->new;
   {
     my ($sql, @bind) = $sa->select('foo', '*', {}, { for => 'update' } );
     is_same_sql_bind(

@@ -3,16 +3,16 @@ use warnings;
 use Test::More;
 
 BEGIN {
-  require DBIx::Class::Optional::Dependencies;
-  plan skip_all => 'Test needs ' . DBIx::Class::Optional::Dependencies->req_missing_for ('id_shortener')
-    unless DBIx::Class::Optional::Dependencies->req_ok_for ('id_shortener');
+  require DBIC::Optional::Dependencies;
+  plan skip_all => 'Test needs ' . DBIC::Optional::Dependencies->req_missing_for ('id_shortener')
+    unless DBIC::Optional::Dependencies->req_ok_for ('id_shortener');
 }
 
 use Test::Exception;
 use Data::Dumper::Concise;
 use lib qw(t/lib);
 use DBICTest ':DiffSQL';
-use DBIx::Class::SQLMaker::Oracle;
+use DBIC::SQLMaker::Oracle;
 
 # FIXME - TEMPORARY until this merges with master
 use constant IGNORE_NONLOCAL_BINDTYPES => 1;
@@ -61,8 +61,8 @@ my @handle_tests = (
     # TODO: NOCYCLE parameter doesn't work
 );
 
-my $sqla_oracle = DBIx::Class::SQLMaker::Oracle->new( quote_char => '"', name_sep => '.' );
-isa_ok($sqla_oracle, 'DBIx::Class::SQLMaker::Oracle');
+my $sqla_oracle = DBIC::SQLMaker::Oracle->new( quote_char => '"', name_sep => '.' );
+isa_ok($sqla_oracle, 'DBIC::SQLMaker::Oracle');
 
 
 for my $case (@handle_tests) {

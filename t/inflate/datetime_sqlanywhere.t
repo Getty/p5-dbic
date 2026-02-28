@@ -3,7 +3,7 @@ use warnings;
 
 use Test::More;
 use Scope::Guard ();
-use DBIx::Class::Optional::Dependencies ();
+use DBIC::Optional::Dependencies ();
 use lib qw(t/lib);
 use DBICTest;
 
@@ -12,15 +12,15 @@ my ($dsn2, $user2, $pass2) = @ENV{map { "DBICTEST_SQLANYWHERE_ODBC_${_}" } qw/DS
 
 plan skip_all => 'Test needs ' .
   (join ' and ', map { $_ ? $_ : () }
-    DBIx::Class::Optional::Dependencies->req_missing_for('test_dt'),
+    DBIC::Optional::Dependencies->req_missing_for('test_dt'),
     (join ' or ', map { $_ ? $_ : () }
-      DBIx::Class::Optional::Dependencies->req_missing_for('test_rdbms_sqlanywhere'),
-      DBIx::Class::Optional::Dependencies->req_missing_for('test_rdbms_sqlanywhere_odbc')))
+      DBIC::Optional::Dependencies->req_missing_for('test_rdbms_sqlanywhere'),
+      DBIC::Optional::Dependencies->req_missing_for('test_rdbms_sqlanywhere_odbc')))
   unless
-    DBIx::Class::Optional::Dependencies->req_ok_for ('test_dt') && (
-    $dsn && DBIx::Class::Optional::Dependencies->req_ok_for('test_rdbms_sqlanywhere')
+    DBIC::Optional::Dependencies->req_ok_for ('test_dt') && (
+    $dsn && DBIC::Optional::Dependencies->req_ok_for('test_rdbms_sqlanywhere')
     or
-    $dsn2 && DBIx::Class::Optional::Dependencies->req_ok_for('test_rdbms_sqlanywhere_odbc'))
+    $dsn2 && DBIC::Optional::Dependencies->req_ok_for('test_rdbms_sqlanywhere_odbc'))
       or (not $dsn || $dsn2);
 
 if (not ($dsn || $dsn2)) {

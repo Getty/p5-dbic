@@ -1,5 +1,5 @@
 package DBICNSTest::RtBug41083::ResultSet;
 use strict;
 use warnings;
-use base 'DBIx::Class::ResultSet';
+use base 'DBIC::ResultSet';
 1;

@@ -110,7 +110,7 @@ my $schema = DBICTest->init_schema();
     );
 
     is_deeply (
-      [$new_cds->search ({}, { result_class => 'DBIx::Class::ResultClass::HashRefInflator'})->all ],
+      [$new_cds->search ({}, { result_class => 'DBIC::ResultClass::HashRefInflator'})->all ],
       [
         {
           artist => 1,

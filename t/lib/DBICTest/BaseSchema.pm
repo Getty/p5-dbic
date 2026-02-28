@@ -3,7 +3,7 @@ package #hide from pause
 
 use strict;
 use warnings;
-use base qw(DBICTest::Base DBIx::Class::Schema);
+use base qw(DBICTest::Base DBIC::Schema);
 
 use Fcntl qw(:DEFAULT :seek :flock);
 use Scalar::Util 'weaken';
@@ -21,8 +21,8 @@ sub capture_executed_sql_bind {
 
   # hack around stupid, stupid API
   no warnings 'redefine';
-  local *DBIx::Class::Storage::DBI::_format_for_trace = sub { $_[1] };
-  Class::C3->reinitialize if DBIx::Class::_ENV_::OLD_MRO;
+  local *DBIC::Storage::DBI::_format_for_trace = sub { $_[1] };
+  Class::C3->reinitialize if DBIC::_ENV_::OLD_MRO;
 
 
   local $self->storage->{debugcb};
@@ -147,12 +147,12 @@ sub connection {
     my( $sqlac_like ) = $ENV{DBICTEST_SWAPOUT_SQLAC_WITH} =~ /(.+)/;
     Class::C3::Componentised->ensure_class_loaded( $sqlac_like );
 
-    require DBIx::Class::SQLMaker::ClassicExtensions;
+    require DBIC::SQLMaker::ClassicExtensions;
     require SQL::Abstract::Classic;
 
     Class::C3::Componentised->inject_base(
       'DBICTest::SQLAC::SwapOut',
-      'DBIx::Class::SQLMaker::ClassicExtensions',
+      'DBIC::SQLMaker::ClassicExtensions',
       $sqlac_like,
       'SQL::Abstract::Classic',
     );

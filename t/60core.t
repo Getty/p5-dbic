@@ -213,8 +213,8 @@ $new->update_or_insert;
 is( $schema->resultset("Track")->find(100)->title, 'Insert or Update - updated', 'update_or_insert update ok');
 
 SKIP: {
-    skip "Tests require " . DBIx::Class::Optional::Dependencies->req_missing_for ('test_dt_sqlite'), 13
-      unless DBIx::Class::Optional::Dependencies->req_ok_for ('test_dt_sqlite');
+    skip "Tests require " . DBIC::Optional::Dependencies->req_missing_for ('test_dt_sqlite'), 13
+      unless DBIC::Optional::Dependencies->req_ok_for ('test_dt_sqlite');
 
     # test get_inflated_columns with objects
     my $event = $schema->resultset('Event')->search->first;
@@ -244,7 +244,7 @@ SKIP: {
 
 throws_ok (sub {
   $schema->class("Track")->load_components('DoesNotExist');
-}, qr!Can't locate DBIx/Class/DoesNotExist.pm!, 'exception on nonexisting component');
+}, qr!Can't locate DBIC/DoesNotExist.pm!, 'exception on nonexisting component');
 
 is($schema->class("Artist")->field_name_for->{name}, 'artist name', 'mk_classdata usage ok');
 
@@ -544,7 +544,7 @@ lives_ok (sub { my $newlink = $newbook->link}, "stringify to false value doesn't
 
   my $rowdata = { $schema->resultset('Artist')->next->get_columns };
 
-  my $rs = DBIx::Class::ResultSet->new($handle);
+  my $rs = DBIC::ResultSet->new($handle);
   my $rs_result = $rs->next;
   isa_ok( $rs_result, 'DBICTest::Artist' );
   is_deeply (
@@ -576,17 +576,17 @@ lives_ok (sub { my $newlink = $newbook->link}, "stringify to false value doesn't
 # us a row object
 {
     my $new_artist = $schema->resultset('Artist')->new({});
-    isa_ok( $new_artist, 'DBIx::Class::Row', '$rs->new gives a row object' );
+    isa_ok( $new_artist, 'DBIC::Row', '$rs->new gives a row object' );
 }
 
 
 # make sure we got rid of the compat shims
 SKIP: {
     my $remove_version = 0.083;
-    skip "Remove in $remove_version", 3 if $DBIx::Class::VERSION < $remove_version;
+    skip "Remove in $remove_version", 3 if $DBIC::VERSION < $remove_version;
 
     for (qw/compare_relationship_keys pk_depends_on resolve_condition/) {
-      ok (! DBIx::Class::ResultSource->can ($_), "$_ no longer provided by DBIx::Class::ResultSource, removed before $remove_version");
+      ok (! DBIC::ResultSource->can ($_), "$_ no longer provided by DBIC::ResultSource, removed before $remove_version");
     }
 }
 
@@ -626,7 +626,7 @@ SKIP: {
 #------------------------------
 #
 SKIP: {
-    skip "Something needs to be done before 0.09", 2 if $DBIx::Class::VERSION < 0.09;
+    skip "Something needs to be done before 0.09", 2 if $DBIC::VERSION < 0.09;
 
     my $row = $schema->resultset ('Artist')->next;
 

@@ -3,7 +3,7 @@ package    # hide from PAUSE
 
 use strict;
 use warnings;
-use base 'DBIx::Class::Core';
+use base 'DBIC::Core';
 
 __PACKAGE__->table('artwork');
 

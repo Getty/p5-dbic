@@ -6,9 +6,9 @@ use lib qw(t/lib);
 use List::Util 'min';
 use DBICTest ':DiffSQL';
 my ($ROWS, $TOTAL, $OFFSET) = (
-   DBIx::Class::SQLMaker::ClassicExtensions->__rows_bindtype,
-   DBIx::Class::SQLMaker::ClassicExtensions->__total_bindtype,
-   DBIx::Class::SQLMaker::ClassicExtensions->__offset_bindtype,
+   DBIC::SQLMaker::ClassicExtensions->__rows_bindtype,
+   DBIC::SQLMaker::ClassicExtensions->__total_bindtype,
+   DBIC::SQLMaker::ClassicExtensions->__offset_bindtype,
 );
 
 

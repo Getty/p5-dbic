@@ -5,12 +5,12 @@ use Test::Exception tests => 1;
 use lib qw(t/lib);
 use DBICTest;
 use DBICTest::Schema;
-use DBIx::Class::ResultSource::Table;
+use DBIC::ResultSource::Table;
 
 my $schema = DBICTest->init_schema();
 
-my $foo = DBIx::Class::ResultSource::Table->new({ name => "foo" });
-my $bar = DBIx::Class::ResultSource::Table->new({ name => "bar" });
+my $foo = DBIC::ResultSource::Table->new({ name => "foo" });
+my $bar = DBIC::ResultSource::Table->new({ name => "bar" });
 
 lives_ok {
     $schema->register_source(foo => $foo);

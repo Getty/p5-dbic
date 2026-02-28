@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use Test::More;
 use Test::Exception;
-use DBIx::Class::_Util 'sigwarn_silencer';
+use DBIC::_Util 'sigwarn_silencer';
 
 @YA::Film::ISA = 'Film';
 

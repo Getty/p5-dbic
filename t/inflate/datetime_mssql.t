@@ -5,7 +5,7 @@ use Test::More;
 use Test::Exception;
 use Scope::Guard ();
 use Try::Tiny;
-use DBIx::Class::Optional::Dependencies ();
+use DBIC::Optional::Dependencies ();
 use lib qw(t/lib);
 use DBICTest;
 
@@ -15,18 +15,18 @@ my ($dsn3, $user3, $pass3) = @ENV{map { "DBICTEST_MSSQL_ADO_${_}" }  qw/DSN USER
 
 plan skip_all => 'Test needs ' .
   (join ' and ', map { $_ ? $_ : () }
-    DBIx::Class::Optional::Dependencies->req_missing_for('test_dt'),
+    DBIC::Optional::Dependencies->req_missing_for('test_dt'),
     (join ' or ', map { $_ ? $_ : () }
-      DBIx::Class::Optional::Dependencies->req_missing_for('test_rdbms_mssql_odbc'),
-      DBIx::Class::Optional::Dependencies->req_missing_for('test_rdbms_mssql_sybase'),
-      DBIx::Class::Optional::Dependencies->req_missing_for('test_rdbms_mssql_ado')))
+      DBIC::Optional::Dependencies->req_missing_for('test_rdbms_mssql_odbc'),
+      DBIC::Optional::Dependencies->req_missing_for('test_rdbms_mssql_sybase'),
+      DBIC::Optional::Dependencies->req_missing_for('test_rdbms_mssql_ado')))
   unless
-    DBIx::Class::Optional::Dependencies->req_ok_for ('test_dt') && (
-    $dsn && DBIx::Class::Optional::Dependencies->req_ok_for('test_rdbms_mssql_odbc')
+    DBIC::Optional::Dependencies->req_ok_for ('test_dt') && (
+    $dsn && DBIC::Optional::Dependencies->req_ok_for('test_rdbms_mssql_odbc')
     or
-    $dsn2 && DBIx::Class::Optional::Dependencies->req_ok_for('test_rdbms_mssql_sybase')
+    $dsn2 && DBIC::Optional::Dependencies->req_ok_for('test_rdbms_mssql_sybase')
     or
-    $dsn3 && DBIx::Class::Optional::Dependencies->req_ok_for('test_rdbms_mssql_ado'))
+    $dsn3 && DBIC::Optional::Dependencies->req_ok_for('test_rdbms_mssql_ado'))
       or (not $dsn || $dsn2 || $dsn3);
 
 if (not ($dsn || $dsn2 || $dsn3)) {
@@ -61,7 +61,7 @@ for my $connect_info (@connect_info) {
     my $w;
     local $SIG{__WARN__} = sub { $w = shift };
     $schema->storage->ensure_connected;
-    if ($w =~ /Your DBD::Sybase is too old to support DBIx::Class::InflateColumn::DateTime/) {
+    if ($w =~ /Your DBD::Sybase is too old to support DBIC::InflateColumn::DateTime/) {
       skip "Skipping tests on old DBD::Sybase " . DBD::Sybase->VERSION, 1;
     }
   }

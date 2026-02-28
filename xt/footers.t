@@ -7,14 +7,14 @@ use File::Find;
 my $boilerplate_headings = q{
 =head1 FURTHER QUESTIONS?
 
-Check the list of L<additional DBIC resources|DBIx::Class/GETTING HELP/SUPPORT>.
+Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
 =head1 COPYRIGHT AND LICENSE
 
-This module is free software L<copyright|DBIx::Class/COPYRIGHT AND LICENSE>
-by the L<DBIx::Class (DBIC) authors|DBIx::Class/AUTHORS>. You can
+This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
+by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
 redistribute it and/or modify it under the same terms as the
-L<DBIx::Class library|DBIx::Class/COPYRIGHT AND LICENSE>.
+L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 };
 
 find({
@@ -29,11 +29,11 @@ find({
     if ($data !~ /^=head1 NAME/m) {
 
       # the generator is full of false positives, .pod is where it's at
-      return if $fn =~ qr{\Qlib/DBIx/Class/Optional/Dependencies.pm};
+      return if $fn =~ qr{\Qlib/DBIC/Optional/Dependencies.pm};
 
       ok ( $data !~ /\bcopyright\b/i, "No copyright notices in $fn without apparent POD" );
     }
-    elsif ($fn =~ qr{\Qlib/DBIx/Class.}) {
+    elsif ($fn =~ qr{\Qlib/DBIC.}) {
       # nothing to check there - a static set of words
     }
     else {

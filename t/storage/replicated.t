@@ -7,9 +7,9 @@ use lib qw(t/lib);
 use DBICTest;
 
 BEGIN {
-    require DBIx::Class;
-    plan skip_all => 'Test needs ' . DBIx::Class::Optional::Dependencies->req_missing_for ('test_replicated')
-      unless DBIx::Class::Optional::Dependencies->req_ok_for ('test_replicated');
+    require DBIC;
+    plan skip_all => 'Test needs ' . DBIC::Optional::Dependencies->req_missing_for ('test_replicated')
+      unless DBIC::Optional::Dependencies->req_ok_for ('test_replicated');
 
     if (DBICTest::RunMode->is_smoker) {
       my $mver = Moose->VERSION;
@@ -30,9 +30,9 @@ note "Using Moose version $Moose::VERSION and MooseX::Types version $MooseX::Typ
 my $var_dir = quotemeta ( File::Spec->catdir(qw/t var/) );
 
 ## Add a connect_info option to test option merging.
-use DBIx::Class::Storage::DBI::Replicated;
+use DBIC::Storage::DBI::Replicated;
 {
-    package DBIx::Class::Storage::DBI::Replicated;
+    package DBIC::Storage::DBI::Replicated;
 
     use Moose;
 
@@ -73,7 +73,7 @@ TESTSCHEMACLASSES: {
     ## Create an object to contain your replicated stuff.
     ## --------------------------------------------------------------------- ##
 
-    package DBIx::Class::DBI::Replicated::TestReplication;
+    package DBIC::DBI::Replicated::TestReplication;
 
     use DBICTest;
     use base 'Class::Accessor::Grouped';
@@ -143,11 +143,11 @@ TESTSCHEMACLASSES: {
     ## replication support.
     ## --------------------------------------------------------------------- ##
 
-    package DBIx::Class::DBI::Replicated::TestReplication::SQLite;
+    package DBIC::DBI::Replicated::TestReplication::SQLite;
 
     use DBICTest;
     use File::Copy;
-    use base 'DBIx::Class::DBI::Replicated::TestReplication';
+    use base 'DBIC::DBI::Replicated::TestReplication';
 
     __PACKAGE__->mk_group_accessors( simple => qw( master_path slave_paths ) );
 
@@ -222,8 +222,8 @@ TESTSCHEMACLASSES: {
     ## that will replicate in less than 1 second.
     ## --------------------------------------------------------------------- ##
 
-    package DBIx::Class::DBI::Replicated::TestReplication::Custom;
-    use base 'DBIx::Class::DBI::Replicated::TestReplication';
+    package DBIC::DBI::Replicated::TestReplication::Custom;
+    use base 'DBIC::DBI::Replicated::TestReplication';
 
     ## Return an Array of ArrayRefs where each ArrayRef is suitable to use for
     ## $storage->connect_info to be used for connecting replicants.
@@ -249,8 +249,8 @@ TESTSCHEMACLASSES: {
 ## Thi first bunch of tests are basic, just make sure all the bits are behaving
 
 my $replicated_class = DBICTest->has_custom_dsn ?
-    'DBIx::Class::DBI::Replicated::TestReplication::Custom' :
-    'DBIx::Class::DBI::Replicated::TestReplication::SQLite';
+    'DBIC::DBI::Replicated::TestReplication::Custom' :
+    'DBIC::DBI::Replicated::TestReplication::SQLite';
 
 my $replicated;
 
@@ -260,22 +260,22 @@ for my $method (qw/by_connect_info by_storage_type/) {
       => "Created a replication object $method";
 
   isa_ok $replicated->schema
-      => 'DBIx::Class::Schema';
+      => 'DBIC::Schema';
 
   isa_ok $replicated->schema->storage
-      => 'DBIx::Class::Storage::DBI::Replicated';
+      => 'DBIC::Storage::DBI::Replicated';
 
   isa_ok $replicated->schema->storage->balancer
-      => 'DBIx::Class::Storage::DBI::Replicated::Balancer::Random'
+      => 'DBIC::Storage::DBI::Replicated::Balancer::Random'
       => 'configured balancer_type';
 }
 
 ### check that all Storage::DBI methods are handled by ::Replicated
 {
   my @storage_dbi_methods = Class::MOP::Class
-    ->initialize('DBIx::Class::Storage::DBI')->get_all_method_names;
+    ->initialize('DBIC::Storage::DBI')->get_all_method_names;
 
-  my @replicated_methods  = DBIx::Class::Storage::DBI::Replicated->meta
+  my @replicated_methods  = DBIC::Storage::DBI::Replicated->meta
     ->get_all_method_names;
 
 # remove constants and OTHER_CRAP
@@ -284,8 +284,8 @@ for my $method (qw/by_connect_info by_storage_type/) {
 # remove CAG accessors
   @storage_dbi_methods = grep !/_accessor\z/, @storage_dbi_methods;
 
-# remove DBIx::Class (the root parent, with CAG and stuff) methods
-  my @root_methods = Class::MOP::Class->initialize('DBIx::Class')
+# remove DBIC (the root parent, with CAG and stuff) methods
+  my @root_methods = Class::MOP::Class->initialize('DBIC')
     ->get_all_method_names;
   my %count;
   $count{$_}++ for (@storage_dbi_methods, @root_methods);
@@ -310,12 +310,12 @@ for my $method (qw/by_connect_info by_storage_type/) {
   $count{$_}++ for (@storage_dbi_methods, @replicated_methods);
 
   if ((grep $count{$_} == 2, @storage_dbi_methods) == @storage_dbi_methods) {
-    pass 'all DBIx::Class::Storage::DBI methods implemented';
+    pass 'all DBIC::Storage::DBI methods implemented';
   }
   else {
     my @unimplemented = grep $count{$_} == 1, @storage_dbi_methods;
 
-    fail 'the following DBIx::Class::Storage::DBI methods are unimplemented: '
+    fail 'the following DBIC::Storage::DBI methods are unimplemented: '
       . "@unimplemented";
   }
 }
@@ -324,13 +324,13 @@ ok $replicated->schema->storage->meta
     => 'has a meta object';
 
 isa_ok $replicated->schema->storage->master
-    => 'DBIx::Class::Storage::DBI';
+    => 'DBIC::Storage::DBI';
 
 isa_ok $replicated->schema->storage->pool
-    => 'DBIx::Class::Storage::DBI::Replicated::Pool';
+    => 'DBIC::Storage::DBI::Replicated::Pool';
 
 does_ok $replicated->schema->storage->balancer
-    => 'DBIx::Class::Storage::DBI::Replicated::Balancer';
+    => 'DBIC::Storage::DBI::Replicated::Balancer';
 
 ok my @replicant_connects = $replicated->generate_replicant_connect_info
     => 'got replication connect information';
@@ -358,7 +358,7 @@ is scalar @all_storages,
     3
     => 'correct number of ->all_storages';
 
-is ((grep $_->isa('DBIx::Class::Storage::DBI'), @all_storages),
+is ((grep $_->isa('DBIC::Storage::DBI'), @all_storages),
     3
     => '->all_storages are correct type');
 
@@ -380,7 +380,7 @@ $replicated->schema->storage->debugobj->silence(1)
   if grep { $_ =~ /$var_dir/ } @replicant_names;
 
 isa_ok $replicated->schema->storage->balancer->current_replicant
-    => 'DBIx::Class::Storage::DBI';
+    => 'DBIC::Storage::DBI';
 
 $replicated->schema->storage->debugobj->silence(0);
 
@@ -391,16 +391,16 @@ is $replicated->schema->storage->pool->num_replicants => 2
     => 'has two replicants';
 
 does_ok $replicated_storages[0]
-    => 'DBIx::Class::Storage::DBI::Replicated::Replicant';
+    => 'DBIC::Storage::DBI::Replicated::Replicant';
 
 does_ok $replicated_storages[1]
-    => 'DBIx::Class::Storage::DBI::Replicated::Replicant';
+    => 'DBIC::Storage::DBI::Replicated::Replicant';
 
 does_ok $replicated->schema->storage->replicants->{$replicant_names[0]}
-    => 'DBIx::Class::Storage::DBI::Replicated::Replicant';
+    => 'DBIC::Storage::DBI::Replicated::Replicant';
 
 does_ok $replicated->schema->storage->replicants->{$replicant_names[1]}
-    => 'DBIx::Class::Storage::DBI::Replicated::Replicant';
+    => 'DBIC::Storage::DBI::Replicated::Replicant';
 
 ## Add some info to the database
 
@@ -452,7 +452,7 @@ is $artist1->name, 'Ozric Tentacles'
     no warnings qw/once redefine/;
 
     local
-    *DBIx::Class::Storage::DBI::Replicated::Balancer::Random::_random_number =
+    *DBIC::Storage::DBI::Replicated::Balancer::Random::_random_number =
     sub { 999 };
 
     $replicated->schema->storage->balancer->increment_storage;

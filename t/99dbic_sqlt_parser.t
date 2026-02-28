@@ -8,13 +8,13 @@ use Scalar::Util ();
 
 use lib qw(t/lib);
 use DBICTest;
-use DBIx::Class::_Util 'sigwarn_silencer';
+use DBIC::_Util 'sigwarn_silencer';
 
 BEGIN {
-  require DBIx::Class;
+  require DBIC;
   plan skip_all =>
-      'Test needs ' . DBIx::Class::Optional::Dependencies->req_missing_for ('deploy')
-    unless DBIx::Class::Optional::Dependencies->req_ok_for ('deploy')
+      'Test needs ' . DBIC::Optional::Dependencies->req_missing_for ('deploy')
+    unless DBIC::Optional::Dependencies->req_ok_for ('deploy')
 }
 
 # Test for SQLT-related leaks
@@ -27,7 +27,7 @@ BEGIN {
   );
 
   for my $parser_args_key (qw(
-    DBIx::Class::Schema
+    DBIC::Schema
     DBIx::Schema
     package
   )) {
@@ -67,7 +67,7 @@ SKIP: {
     )->translate(
       data => SQL::Translator->new(
         parser_args => { dbic_schema => $s },
-        parser => 'SQL::Translator::Parser::DBIx::Class',
+        parser => 'SQL::Translator::Parser::DBIC',
         producer => 'SQL::Translator::Producer::YAML',
       )->translate
     );
@@ -165,7 +165,7 @@ my $idx_exceptions = {
 
         use base qw/DBICTest::BaseResult/;
 
-        __PACKAGE__->table_class('DBIx::Class::ResultSource::View');
+        __PACKAGE__->table_class('DBIC::ResultSource::View');
         __PACKAGE__->table('noviewdefinition');
 
         1;
@@ -200,7 +200,7 @@ lives_ok (sub {
 {
   package DBICTest::PartialSchema;
 
-  use base qw/DBIx::Class::Schema/;
+  use base qw/DBIC::Schema/;
 
   __PACKAGE__->load_classes(
     { 'DBICTest::Schema' => [qw/
@@ -297,7 +297,7 @@ sub create_schema {
 
   my $sqlt = SQL::Translator->new( $sqltargs );
 
-  $sqlt->parser('SQL::Translator::Parser::DBIx::Class');
+  $sqlt->parser('SQL::Translator::Parser::DBIC');
   return $sqlt->translate(
     $args->{schema} ? ( data => $args->{schema} ) : ()
   ) || die $sqlt->error;

@@ -3,7 +3,7 @@ package MyApp::Schema::Result::Track;
 use warnings;
 use strict;
 
-use base qw( DBIx::Class::Core );
+use base qw( DBIC::Core );
 
 __PACKAGE__->table('track');
 

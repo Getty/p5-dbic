@@ -1,0 +1,74 @@
+=head1 NAME
+
+DBIC::Manual::DocMap - What documentation do we have?
+
+=head1 Manuals
+
+=over 4
+
+=item L<DBIC::Manual> - User's Manual overview.
+
+=item L<DBIC::Manual::QuickStart> - Up and running with DBIC in 10 minutes.
+
+=item L<DBIC::Manual::Intro> - More detailed introduction to setting up and using DBIC.
+
+=item L<DBIC::Manual::SQLHackers> - How to use DBIC if you know SQL (external, available on CPAN)
+
+=item L<DBIC::Manual::Joining> - Joining tables with DBIC.
+
+=item L<DBIC::Manual::Features> - A boatload of DBIC features with links to respective documentation.
+
+=item L<DBIC::Manual::Glossary> - What do all those terms mean?
+
+=item L<DBIC::Manual::Cookbook> - Various short recipes on how to do things.
+
+=item L<DBIC::Manual::FAQ> - Frequently Asked Questions, gathered from IRC and the mailing list.
+
+=item L<DBIC::Manual::Troubleshooting> - What to do if things go wrong (diagnostics of known error messages).
+
+=back
+
+=head1 Some essential reference documentation
+
+The first two list items are the most important.
+
+=over 4
+
+=item L<DBIC::ResultSet/search> - Selecting and manipulating sets.
+
+The DSL (mini-language) for query composition is only partially explained there,
+see L<SQL::Abstract::Classic/WHERE CLAUSES> for the complete details.
+
+=item L<C<$schema>::Result::C<$resultclass>|DBIC::Manual::ResultClass>
+- Classes representing a single result (row) from a DB query.
+
+Such classes normally subclass L<DBIC::Core>, the methods inherited
+from L<DBIC::Row|DBIC::Row/METHODS> and
+L<DBIC::Relationship::Base|DBIC::Relationship::Base/METHODS>
+are used most often.
+
+=item L<DBIC::ResultSetColumn> - Perform operations on a single column of a ResultSet.
+
+=item L<DBIC::ResultSource> - Source/Table definition functions.
+
+=item L<DBIC::Schema> - Overall sources, and connection container.
+
+=item L<DBIC::Relationship> - Simple relationship declarations.
+
+=item L<DBIC::Relationship::Base> - Relationship declaration details.
+
+=item L<DBIC::InflateColumn> - Making objects out of your column values.
+
+=back
+
+=head1 FURTHER QUESTIONS?
+
+Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
+
+=head1 COPYRIGHT AND LICENSE
+
+This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
+by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
+redistribute it and/or modify it under the same terms as the
+L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
+

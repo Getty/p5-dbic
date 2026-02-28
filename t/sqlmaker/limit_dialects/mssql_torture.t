@@ -4,11 +4,11 @@ use Test::More;
 use lib qw(t/lib);
 use DBICTest ':DiffSQL';
 
-my $OFFSET = DBIx::Class::SQLMaker::ClassicExtensions->__offset_bindtype;
-my $TOTAL  = DBIx::Class::SQLMaker::ClassicExtensions->__total_bindtype;
+my $OFFSET = DBIC::SQLMaker::ClassicExtensions->__offset_bindtype;
+my $TOTAL  = DBIC::SQLMaker::ClassicExtensions->__total_bindtype;
 
 my $schema = DBICTest->init_schema (
-  storage_type => 'DBIx::Class::Storage::DBI::MSSQL',
+  storage_type => 'DBIC::Storage::DBI::MSSQL',
   no_deploy => 1,
   quote_names => 1
 );

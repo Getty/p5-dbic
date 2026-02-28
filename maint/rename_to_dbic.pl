@@ -48,9 +48,8 @@ my $source_exists = -f "$ROOT/lib/DBIx/Class.pm";
 my $target_exists = -f "$ROOT/lib/${TO_PATH}.pm";
 
 die "Run this from the distribution root.\n"
-  . "Expected lib/DBIx/Class.pm (source) but not found.\n"
-  . "(If already renamed, source is gone — nothing to do)\n"
-  unless $source_exists;
+  . "Expected lib/DBIx/Class.pm (source) or lib/${TO_PATH}.pm (already moved)\n"
+  unless $source_exists || $target_exists;
 
 printf "Rename: %s → %s\n", $FROM_PKG, $TO_PKG;
 printf "Mode:   %s | Phase: %s\n\n", ($DRY_RUN ? 'DRY RUN' : 'APPLYING'), $PHASE;

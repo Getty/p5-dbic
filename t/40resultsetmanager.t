@@ -8,7 +8,7 @@ use DBICTest;
 
 warnings_exist { require DBICTest::ResultSetManager }
   [
-    qr/\QDBIx::Class::ResultSetManager never left experimental status/,
+    qr/\QDBIC::ResultSetManager never left experimental status/,
   ],
   'found deprecation warning'
 ;

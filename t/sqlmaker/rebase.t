@@ -37,13 +37,13 @@ is_deeply(
   mro::get_linear_isa( ref( $schema->storage->sql_maker ) ),
   [
     qw(
-      DBIx::Class::SQLMaker::SQLite__REBASED_ON__DBICTest::SQLMRebase
-      DBIx::Class::SQLMaker::SQLite
-      DBIx::Class::SQLMaker
+      DBIC::SQLMaker::SQLite__REBASED_ON__DBICTest::SQLMRebase
+      DBIC::SQLMaker::SQLite
+      DBIC::SQLMaker
       DBICTest::SQLMRebase
-      DBIx::Class::SQLMaker::ClassicExtensions
+      DBIC::SQLMaker::ClassicExtensions
     ),
-    @{ mro::get_linear_isa( 'DBIx::Class' ) },
+    @{ mro::get_linear_isa( 'DBIC' ) },
     @{ mro::get_linear_isa( 'SQL::Abstract::Classic' ) },
   ],
   'Expected SQLM object inheritance after rebase',
@@ -63,7 +63,7 @@ $base_schema->resultset('Artist')->count_rs->as_query;
 
 is(
   ref( $base_schema->storage->sql_maker ),
-  'DBIx::Class::SQLMaker::SQLite',
+  'DBIC::SQLMaker::SQLite',
   'Expected core SQLM object on original schema remains',
 );
 

@@ -3,9 +3,9 @@ package    # hide from PAUSE
 
 use strict;
 use warnings;
-use base 'DBIx::Class::Core';
+use base 'DBIC::Core';
 
-__PACKAGE__->table_class('DBIx::Class::ResultSource::View');
+__PACKAGE__->table_class('DBIC::ResultSource::View');
 __PACKAGE__->table('year_2010_cds');
 __PACKAGE__->result_source_instance->view_definition(
     "SELECT id,title,artist,year,number_tracks FROM cd WHERE year = '2010'");

@@ -4,16 +4,16 @@ use warnings;
 use Test::More;
 
 BEGIN {
-  require DBIx::Class::Optional::Dependencies;
-  plan skip_all => 'Test needs ' . DBIx::Class::Optional::Dependencies->req_missing_for ('id_shortener')
-    unless DBIx::Class::Optional::Dependencies->req_ok_for ('id_shortener');
+  require DBIC::Optional::Dependencies;
+  plan skip_all => 'Test needs ' . DBIC::Optional::Dependencies->req_missing_for ('id_shortener')
+    unless DBIC::Optional::Dependencies->req_ok_for ('id_shortener');
 }
 
 use lib qw(t/lib);
 use DBICTest ':DiffSQL';
-use DBIx::Class::SQLMaker::OracleJoins;
+use DBIC::SQLMaker::OracleJoins;
 
-my $sa = DBIx::Class::SQLMaker::OracleJoins->new;
+my $sa = DBIC::SQLMaker::OracleJoins->new;
 
 for my $rhs ( "me.artist", { -ident => "me.artist" } ) {
 

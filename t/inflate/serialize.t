@@ -35,7 +35,7 @@ DBICTest::Schema::Serialized->inflate_column( 'serialized',
       deflate => $selected->{deflater},
     },
 );
-Class::C3->reinitialize if DBIx::Class::_ENV_::OLD_MRO;
+Class::C3->reinitialize if DBIC::_ENV_::OLD_MRO;
 
 my $struct_hash = {
     a => 1,

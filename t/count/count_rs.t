@@ -7,8 +7,8 @@ use Test::More;
 use DBICTest ':DiffSQL';
 
 my ($ROWS, $OFFSET) = (
-   DBIx::Class::SQLMaker::ClassicExtensions->__rows_bindtype,
-   DBIx::Class::SQLMaker::ClassicExtensions->__offset_bindtype,
+   DBIC::SQLMaker::ClassicExtensions->__rows_bindtype,
+   DBIC::SQLMaker::ClassicExtensions->__offset_bindtype,
 );
 
 my $schema = DBICTest->init_schema();
