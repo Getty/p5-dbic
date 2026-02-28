@@ -41,9 +41,8 @@ my %stores = (
       return thaw($ice);
     },
 
-    "freeze/thaw_func (cdbi legacy)" => sub {
+    "freeze/thaw_func (leaked schema)" => sub {
       # this one is special-cased to leak the $schema all over
-      # the same way as cdbi-compat does
       DBICTest::Artist->result_source_instance->schema($schema);
       DBICTest::CD->result_source_instance->schema($schema);
 

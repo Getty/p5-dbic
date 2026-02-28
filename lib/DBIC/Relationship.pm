@@ -223,8 +223,7 @@ C<belongs_to> accessor is called when any part of the foreign key IS NULL. To
 disable this behavior, pass C<< undef_on_null_fk => 0 >> in the C<\%attrs>
 hashref.
 
-NOTE: If you are used to L<Class::DBI> relationships, this is the equivalent
-of C<has_a>.
+NOTE: This is conceptually similar to a foreign key relationship.
 
 See L<DBIC::Relationship::Base/attributes> for documentation on relationship
 methods and valid relationship attributes. Also see L<DBIC::ResultSet>

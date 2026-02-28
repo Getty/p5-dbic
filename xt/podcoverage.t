@@ -130,7 +130,6 @@ my $exceptions = {
     'DBIC::Componentised'                    => { skip => 1 },
     'DBIC::AccessorGroup'                    => { skip => 1 },
     'DBIC::Relationship::*'                  => { skip => 1 },
-    'DBIC::ResultSetProxy'                   => { skip => 1 },
     'DBIC::ResultSourceProxy'                => { skip => 1 },
     'DBIC::ResultSource::*'                  => { skip => 1 },
     'DBIC::Storage::Statistics'              => { skip => 1 },
@@ -150,9 +149,7 @@ my $exceptions = {
 
 # deprecated / backcompat stuff
     'DBIC::Serialize::Storable'              => { skip => 1 },
-    'DBIC::CDBICompat*'                      => { skip => 1 },
     'DBIC::ResultSetManager'                 => { skip => 1 },
-    'DBIC::DB'                               => { skip => 1 },
 
 # skipped because the synopsis covers it clearly
     'DBIC::InflateColumn::File'              => { skip => 1 },
