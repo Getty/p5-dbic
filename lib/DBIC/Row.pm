@@ -523,7 +523,7 @@ contain scalar references, e.g.:
   $result->update({ last_modified => \'NOW()' });
 
 The update will pass the values verbatim into SQL. (See
-L<SQL::Abstract::Classic> docs).  The values in your Result object will NOT
+L<SQL::Abstract> docs).  The values in your Result object will NOT
 change as a result of the update call, if you want the object to be updated
 with the actual values from the database, call L</discard_changes> after the
 update.
@@ -1575,6 +1575,83 @@ sub throw_exception {
     DBIC::Exception->throw(@_);
   }
 }
+
+
+# ============================================================
+# Integrated helper methods (from DBIx::Class::Helpers by FREW)
+# ============================================================
+
+=head2 TO_JSON
+
+  my $hashref = $row->TO_JSON;
+
+Returns a hashref of the row's column values suitable for JSON
+serialization. Automatically excludes C<text>, C<ntext>, and C<blob>
+columns unless C<< is_serializable => 1 >> is set in the column info.
+Numeric columns are numified for correct JSON output.
+
+=cut
+
+{
+  my $dont_serialize = { text => 1, ntext => 1, blob => 1 };
+
+  sub _is_column_serializable {
+    my ($self, $column) = @_;
+    my $info = $self->column_info($column);
+    if (!defined $info->{is_serializable}) {
+      if (defined $info->{data_type} && $dont_serialize->{lc $info->{data_type}}) {
+        $info->{is_serializable} = 0;
+      } else {
+        $info->{is_serializable} = 1;
+      }
+    }
+    return $info->{is_serializable};
+  }
+}
+
+sub serializable_columns {
+  my $self = shift;
+  return [
+    grep { $self->_is_column_serializable($_) }
+      $self->result_source->columns
+  ];
+}
+
+sub TO_JSON {
+  my $self = shift;
+  my %all_cols = $self->get_columns;
+  my @ser_cols = grep { exists $all_cols{$_} }
+    @{ $self->serializable_columns };
+
+  my %data;
+  for my $col (@ser_cols) {
+    my $val = $all_cols{$col};
+    # numify numeric columns for correct JSON encoding
+    if (defined $val && $self->_is_column_numeric($col)) {
+      $val += 0;
+    }
+    $data{$col} = $val;
+  }
+  return \%data;
+}
+
+=head2 self_rs
+
+  my $rs = $row->self_rs;
+
+Returns a ResultSet containing only this row, useful for applying
+ResultSet methods to a single row.
+
+=cut
+
+sub self_rs {
+  my ($self) = @_;
+  my $rs = $self->result_source->resultset;
+  return $rs->search_rs($self->ident_condition($rs->current_source_alias));
+}
+
+# --- clean_rs: get unfiltered ResultSet for this row's source ---
+sub clean_rs { shift->result_source->resultset }
 
 =head2 id
 

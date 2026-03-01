@@ -58,9 +58,8 @@ Creates database classes based on a schema. This is the recommended way to
 use L<DBIC> and allows you to use more than one concurrent connection
 with your classes.
 
-NB: If you're used to L<Class::DBI> it's worth reading the L</SYNOPSIS>
-carefully, as DBIC does things a little differently. Note in
-particular which module inherits off which.
+NB: It's worth reading the L</SYNOPSIS> carefully. Note in particular which
+module inherits off which.
 
 =head1 SETUP METHODS
 
@@ -593,10 +592,66 @@ sub source {
 
   # if we got here, they probably passed a full class name
   my $mapped = $self->class_mappings->{$source_name};
-  $self->throw_exception("Can't find source for ${source_name}")
-    unless $mapped && exists $sreg->{$mapped};
-  return $sreg->{$mapped};
+  if ($mapped && exists $sreg->{$mapped}) {
+    return $sreg->{$mapped};
+  }
+
+  # Provide helpful "did you mean?" suggestions
+  my @sources = sort keys %$sreg;
+  my @suggestions;
+  for my $s (@sources) {
+    # Simple edit distance check — suggest if name is close
+    my $dist = _simple_distance(lc $source_name, lc $s);
+    push @suggestions, $s if $dist <= 3;
+  }
+
+  my $msg = "Can't find source for ${source_name}";
+  if (@suggestions) {
+    $msg .= ". Did you mean: " . join(', ', @suggestions) . "?";
+  }
+  elsif (@sources) {
+    $msg .= ". Available sources: " . join(', ', @sources[0..($#sources > 9 ? 9 : $#sources)]);
+    $msg .= ", ..." if @sources > 10;
+  }
+  $self->throw_exception($msg);
 }
+
+# Simple Levenshtein distance for "did you mean?" suggestions
+sub _simple_distance {
+  my ($s, $t) = @_;
+  my @s = split //, $s;
+  my @t = split //, $t;
+  my $n = scalar @s;
+  my $m = scalar @t;
+  return $m unless $n;
+  return $n unless $m;
+
+  my @d;
+  $d[$_][0] = $_ for 0 .. $n;
+  $d[0][$_] = $_ for 0 .. $m;
+
+  for my $i (1 .. $n) {
+    for my $j (1 .. $m) {
+      my $cost = ($s[$i-1] eq $t[$j-1]) ? 0 : 1;
+      $d[$i][$j] = _min(
+        $d[$i-1][$j] + 1,
+        $d[$i][$j-1] + 1,
+        $d[$i-1][$j-1] + $cost,
+      );
+    }
+  }
+  return $d[$n][$m];
+}
+
+sub _min { my $m = shift; $m = $_ < $m ? $_ : $m for @_; $m }
+
+# --- DateTime convenience methods ---
+
+sub datetime_parser { shift->storage->datetime_parser }
+
+sub parse_datetime { shift->datetime_parser->parse_datetime(@_) }
+
+sub format_datetime { shift->datetime_parser->format_datetime(@_) }
 
 =head2 class
 
@@ -929,8 +984,6 @@ sub compose_namespace {
 
 sub setup_connection_class {
   my ($class, $target, @info) = @_;
-  $class->inject_base($target => 'DBIC::DB');
-  #$target->load_components('DB');
   $target->connection(@info);
 }
 
@@ -1470,83 +1523,6 @@ sub _unregister_source {
     }
 }
 
-
-=head2 compose_connection (DEPRECATED)
-
-=over 4
-
-=item Arguments: $target_namespace, @db_info
-
-=item Return Value: $new_schema
-
-=back
-
-DEPRECATED. You probably wanted compose_namespace.
-
-Actually, you probably just wanted to call connect.
-
-=begin hidden
-
-(hidden due to deprecation)
-
-Calls L<DBIC::Schema/"compose_namespace"> to the target namespace,
-calls L<DBIC::Schema/connection> with @db_info on the new schema,
-then injects the L<DBix::Class::ResultSetProxy> component and a
-resultset_instance classdata entry on all the new classes, in order to support
-$target_namespaces::$class->search(...) method calls.
-
-This is primarily useful when you have a specific need for class method access
-to a connection. In normal usage it is preferred to call
-L<DBIC::Schema/connect> and use the resulting schema object to operate
-on L<DBIC::ResultSet> objects with L<DBIC::Schema/resultset> for
-more information.
-
-=end hidden
-
-=cut
-
-sub compose_connection {
-  my ($self, $target, @info) = @_;
-
-  carp_once "compose_connection deprecated as of 0.08000"
-    unless $INC{"DBIC/CDBICompat.pm"};
-
-  my $base = 'DBIC::ResultSetProxy';
-  try {
-    eval "require ${base};"
-  }
-  catch {
-    $self->throw_exception
-      ("No arguments to load_classes and couldn't load ${base} ($_)")
-  };
-
-  if ($self eq $target) {
-    # Pathological case, largely caused by the docs on early C::M::DBIC::Plain
-    foreach my $source_name ($self->sources) {
-      my $source = $self->source($source_name);
-      my $class = $source->result_class;
-      $self->inject_base($class, $base);
-      $class->mk_classdata(resultset_instance => $source->resultset);
-      $class->mk_classdata(class_resolver => $self);
-    }
-    $self->connection(@info);
-    return $self;
-  }
-
-  my $schema = $self->compose_namespace($target, $base);
-  quote_sub "${target}::schema", '$s', { '$s' => \$schema };
-
-  $schema->connection(@info);
-  foreach my $source_name ($schema->sources) {
-    my $source = $schema->source($source_name);
-    my $class = $source->result_class;
-    #warn "$source_name $class $source ".$source->storage;
-    $class->mk_classdata(result_source_instance => $source);
-    $class->mk_classdata(resultset_instance => $source->resultset);
-    $class->mk_classdata(class_resolver => $schema);
-  }
-  return $schema;
-}
 
 =head1 FURTHER QUESTIONS?
 

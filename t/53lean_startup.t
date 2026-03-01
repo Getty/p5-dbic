@@ -50,7 +50,7 @@ BEGIN {
         and
       @caller
         and
-      $caller[0] =~ /^DBIC/
+      $caller[0] =~ /^DBIC::/
         and
       (caller($up))[3] =~ /\Q$caller[0]/
     ) {
@@ -162,7 +162,7 @@ BEGIN {
 {
   register_lazy_loadable_requires(qw(
     DBI
-    SQL::Abstract::Classic
+    SQL::Abstract
   ));
 
   my $s = DBICTest::Schema->connect('dbi:SQLite::memory:');

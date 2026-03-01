@@ -9,7 +9,7 @@ use DBIC::_Util 'sigwarn_silencer';
 use DBIC::SQLMaker;
 my $sa = DBIC::SQLMaker->new;
 
-$SIG{__WARN__} = sigwarn_silencer( qr/\Q{from} structures with conditions not conforming to the SQL::Abstract::Classic syntax are deprecated/ );
+$SIG{__WARN__} = sigwarn_silencer( qr/\Q{from} structures with conditions not conforming to the SQL::Abstract syntax are deprecated/ );
 
 my @j = (
     { child => 'person' },

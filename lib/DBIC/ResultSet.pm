@@ -27,8 +27,6 @@ use overload
         'bool'   => "_bool",
         fallback => 1;
 
-# this is real - CDBICompat overrides it with insanity
-# yes, prototype won't matter, but that's for now ;)
 sub _bool () { 1 }
 
 __PACKAGE__->mk_group_accessors('simple' => qw/_result_class result_source/);
@@ -371,7 +369,7 @@ For a list of attributes that can be passed to C<search>, see
 L</ATTRIBUTES>. For more examples of using this function, see
 L<Searching|DBIC::Manual::Cookbook/SEARCHING>. For a complete
 documentation for the first argument, see
-L<SQL::Abstract::Classic/"WHERE CLAUSES"> and its extension
+L<SQL::Abstract/"WHERE CLAUSES"> and its extension
 L<DBIC::SQLMaker>.
 
 For more help on using joins with search, see L<DBIC::Manual::Joining>.
@@ -379,7 +377,7 @@ For more help on using joins with search, see L<DBIC::Manual::Joining>.
 =head3 CAVEAT
 
 Note that L</search> does not process/deflate any of the values passed in the
-L<SQL::Abstract::Classic>-compatible search condition structure. This is unlike
+L<SQL::Abstract>-compatible search condition structure. This is unlike
 other condition-bound methods L</new_result>, L</create> and L</find>. The user
 must ensure manually that any value passed to this method will stringify to
 something the RDBMS knows how to deal with. A notable example is the handling
@@ -450,8 +448,7 @@ sub search_rs {
   }
   # legacy search
   elsif (@_) {
-    carp_unique 'search( %condition ) is deprecated, use search( \%condition ) instead'
-      unless $rsrc->result_class->isa('DBIC::CDBICompat');
+    carp_unique 'search( %condition ) is deprecated, use search( \%condition ) instead';
 
     for my $i (0 .. $#_) {
       next if $i % 2;
@@ -670,10 +667,9 @@ sub _stack_cond {
 
 =head2 search_literal
 
-B<CAVEAT>: C<search_literal> is provided for Class::DBI compatibility and
-should only be used in that context. C<search_literal> is a convenience
-method. It is equivalent to calling C<< $schema->search(\[]) >>, but if you
-want to ensure columns are bound correctly, use L</search>.
+B<CAVEAT>: C<search_literal> is a legacy convenience method. It is equivalent
+to calling C<< $schema->search(\[]) >>, but if you want to ensure columns are
+bound correctly, use L</search>.
 
 See L<DBIC::Manual::Cookbook/SEARCHING> and
 L<DBIC::Manual::FAQ/Searching> for searching techniques that do not
@@ -1142,7 +1138,7 @@ sub get_column {
   $cd_rs = $rs->search_like({ title => '%blue%'});
 
 Performs a search, but uses C<LIKE> instead of C<=> as the condition. Note
-that this is simply a convenience method retained for ex Class::DBI users.
+that this is simply a legacy convenience method.
 You most likely want to use L</search> with specific operators.
 
 For more information, see L<DBIC::Manual::Cookbook>.
@@ -1772,8 +1768,8 @@ sub _count_subq_rs {
 
 =head2 count_literal
 
-B<CAVEAT>: C<count_literal> is provided for Class::DBI compatibility and
-should only be used in that context. See L</search_literal> for further info.
+B<CAVEAT>: C<count_literal> is a legacy convenience method.
+See L</search_literal> for further info.
 
 =over 4
 
@@ -4023,6 +4019,500 @@ sub throw_exception {
   }
 }
 
+# ============================================================
+# Integrated helper methods (from DBIx::Class::Helpers by FREW)
+# These are available natively without load_components.
+# ============================================================
+
+=head2 me
+
+ $rs->search({ $rs->me.'title' => 'foo' })
+ $rs->search({ $rs->me('title') => 'foo' })
+
+Returns the current source alias with a dot appended (e.g. C<me.>),
+suitable for use in search conditions. If an argument is passed, it is
+appended to the alias.
+
+=cut
+
+sub me { join('.', $_[0]->current_source_alias, $_[1] || q{}) }
+
+=head2 order_by
+
+ $rs->order_by({ -desc => 'col' })
+ $rs->order_by('col1')
+ $rs->order_by('!col1')          # DESC
+ $rs->order_by('col1,!col2')     # col1 ASC, col2 DESC
+ $rs->order_by(qw(col1 !col2))   # same
+
+Shortcut for C<< ->search(undef, { order_by => ... }) >>. Supports
+"magic string" syntax where C<!> prefix means DESC and commas separate
+multiple columns.
+
+=cut
+
+sub order_by {
+  my ($self, @order) = @_;
+
+  return $self->search(undef, { order_by => $order[0] })
+    if @order && ref($order[0]);
+
+  my @clauses;
+  for (@order) {
+    for my $col (split(/\s*,\s*/)) {
+      my $dir = 'asc';
+      if (substr($col, 0, 1) eq '!') {
+        $col = substr($col, 1);
+        $dir = 'desc';
+      }
+      $col = join('.', $self->current_source_alias, $col)
+        if index($col, '.') == -1;
+      push @clauses, { "-$dir" => $col };
+    }
+  }
+  return $self->search(undef, { order_by => \@clauses });
+}
+
+=head2 columns
+
+ $rs->columns([qw/ col1 col2 /])
+
+Shortcut for C<< ->search(undef, { columns => ... }) >>.
+
+=cut
+
+# Note: DBIC::ResultSet already has a _resolve-time `columns` concept,
+# but no public chainable columns() method. We add one.
+{
+  no warnings 'redefine';
+  # save original if it exists
+  my $orig = __PACKAGE__->can('columns');
+  # The base ResultSet doesn't have a public columns() for chaining,
+  # so we add one. If columns is called with args, it's our shortcut.
+  # If called without args, delegate to result_source->columns via the
+  # existing codepath (which doesn't exist as a method on RS, so this is safe).
+}
+
+sub columns {
+  my $self = shift;
+  return $self->search(undef, { columns => $_[0] }) if @_;
+  return $self->result_source->columns;
+}
+
+=head2 add_columns
+
+ $rs->add_columns([qw/ extra_col1 extra_col2 /])
+
+Shortcut for C<< ->search(undef, { '+columns' => ... }) >>.
+
+=cut
+
+sub add_columns {
+  return $_[0]->search(undef, { '+columns' => $_[1] });
+}
+
+=head2 remove_columns
+
+ $rs->remove_columns([qw/ unwanted_col /])
+
+Shortcut for C<< ->search(undef, { remove_columns => ... }) >>.
+
+=cut
+
+sub remove_columns {
+  return $_[0]->search(undef, { remove_columns => $_[1] });
+}
+
+=head2 distinct
+
+ $rs->distinct
+ $rs->distinct(1)
+
+Shortcut for C<< ->search(undef, { distinct => 1 }) >>.
+
+=cut
+
+sub distinct { $_[0]->search(undef, { distinct => defined $_[1] ? $_[1] : 1 }) }
+
+=head2 group_by
+
+ $rs->group_by([qw/ col1 col2 /])
+
+Shortcut for C<< ->search(undef, { group_by => ... }) >>.
+
+=cut
+
+sub group_by { $_[0]->search(undef, { group_by => $_[1] }) }
+
+=head2 hri
+
+ $rs->hri
+
+Shortcut to set C<result_class> to
+L<DBIC::ResultClass::HashRefInflator>.
+
+=cut
+
+sub hri {
+  $_[0]->search(undef, {
+    result_class => 'DBIC::ResultClass::HashRefInflator'
+  })
+}
+
+=head2 rows
+
+ $rs->rows(10)
+
+Shortcut for C<< ->search(undef, { rows => ... }) >>.
+
+=cut
+
+# Note: rows() already exists in DBIC::ResultSet for getting the rows
+# attribute value. We override to make it chainable when called with args.
+{
+  my $orig_rows = __PACKAGE__->can('rows');
+  no warnings 'redefine';
+  require Sub::Name;
+
+  *rows = Sub::Name::subname rows => sub {
+    if (@_ > 1) {
+      return $_[0]->search(undef, { rows => $_[1] });
+    }
+    return $orig_rows->(@_) if $orig_rows;
+    return undef;
+  };
+}
+
+=head2 limit
+
+ $rs->limit(10)
+
+Alias for L</rows>.
+
+=cut
+
+sub limit { $_[0]->rows($_[1]) }
+
+=head2 has_rows
+
+ if ($rs->has_rows) { ... }
+
+Lightweight check if the ResultSet contains any data, without counting
+all rows.
+
+=cut
+
+sub has_rows { !! $_[0]->rows(1)->next }
+
+=head2 limited_page
+
+ $rs->limited_page(2, 10)
+ $rs->limited_page({ page => 2, rows => 10 })
+
+Combined L</page> + L</rows> shortcut.
+
+=cut
+
+sub limited_page {
+  my $self = shift;
+  if (@_ == 1) {
+    my $arg = shift;
+    if (ref $arg) {
+      return $self->page($arg->{page})->rows($arg->{rows});
+    }
+    return $self->page($arg);
+  }
+  elsif (@_ == 2) {
+    return $self->page($_[0])->rows($_[1]);
+  }
+  $self->throw_exception('Invalid args passed to limited_page');
+}
+
+=head2 prefetch
+
+ $rs->prefetch('rel')
+ $rs->prefetch('rel1', 'rel2')
+
+Shortcut for C<< ->search(undef, { prefetch => ... }) >>.
+
+=cut
+
+sub prefetch { $_[0]->search(undef, { prefetch => @_ > 2 ? [@_[1..$#_]] : $_[1] }) }
+
+=head2 null
+
+ $rs->null('col')
+ $rs->null([qw/ col1 col2 /])
+
+Search for rows where the given column(s) are NULL.
+
+=cut
+
+sub null {
+  my ($self, @columns) = @_;
+  @columns = @{$columns[0]} if @columns == 1 && ref $columns[0] eq 'ARRAY';
+  my $rs = $self;
+  $rs = $rs->search({ $_ => undef }) for @columns;
+  return $rs;
+}
+
+=head2 not_null
+
+ $rs->not_null('col')
+ $rs->not_null([qw/ col1 col2 /])
+
+Search for rows where the given column(s) are NOT NULL.
+
+=cut
+
+sub not_null {
+  my ($self, @columns) = @_;
+  @columns = @{$columns[0]} if @columns == 1 && ref $columns[0] eq 'ARRAY';
+  my $rs = $self;
+  $rs = $rs->search({ $_ => { '!=' => undef } }) for @columns;
+  return $rs;
+}
+
+=head2 like
+
+ $rs->like('col', '%pattern%')
+ $rs->like([qw/ col1 col2 /], '%pattern%')
+
+Search for rows where the given column(s) match the LIKE pattern.
+
+=cut
+
+sub like {
+  my ($self, $columns, $cond) = @_;
+  $columns = [$columns] unless ref $columns;
+  my $rs = $self;
+  $rs = $rs->search({ $_ => { -like => $cond } }) for @$columns;
+  return $rs;
+}
+
+=head2 not_like
+
+ $rs->not_like('col', '%pattern%')
+ $rs->not_like([qw/ col1 col2 /], '%pattern%')
+
+Search for rows where the given column(s) do NOT match the LIKE pattern.
+
+=cut
+
+sub not_like {
+  my ($self, $columns, $cond) = @_;
+  $columns = [$columns] unless ref $columns;
+  my $rs = $self;
+  $rs = $rs->search({ $_ => { -not_like => $cond } }) for @$columns;
+  return $rs;
+}
+
+=head2 results_exist
+
+ my $bool = $rs->results_exist
+ my $bool = $rs->results_exist(\%cond)
+
+Uses SQL C<EXISTS> to efficiently check if the query would return any rows.
+Much lighter than C<< $rs->count >>.
+
+=cut
+
+sub results_exist {
+  my ($self, $cond) = @_;
+
+  my $query = $self->results_exist_as_query($cond);
+  $$query->[0] .= ' AS _existence_subq';
+
+  my (undef, $sth) = $self->result_source
+    ->schema
+    ->storage
+    ->_select($query, \'*', {}, {});
+
+  $sth->fetchall_arrayref->[0][0] ? 1 : 0;
+}
+
+=head2 results_exist_as_query
+
+ my $query = $rs->results_exist_as_query
+ my $query = $rs->results_exist_as_query(\%cond)
+
+Returns a subquery reference that evaluates to a boolean via SQL C<EXISTS>.
+Useful for correlated subqueries.
+
+=cut
+
+sub results_exist_as_query {
+  my ($self, $cond) = @_;
+
+  my $reified = $self->search_rs($cond, {
+    columns => { _results_existence_check => \ '42' }
+  })->as_query;
+
+  $$reified->[0] = "( SELECT EXISTS $$reified->[0] )";
+
+  $reified;
+}
+
+=head2 correlate
+
+ $rs->correlate('relationship')
+
+Returns a ResultSet for the given relationship that is correlated to the
+current ResultSet, suitable for use in subqueries.
+
+ # count books per author
+ $author_rs->search(undef, {
+   '+columns' => {
+     book_count => $author_rs->correlate('books')->count_rs->as_query
+   }
+ });
+
+=cut
+
+sub correlate {
+  my ($self, $rel) = @_;
+
+  my $source = $self->result_source;
+
+  return $source->related_source($rel)->resultset
+    ->search(
+      $source->_resolve_relationship_condition(
+        rel_name      => $rel,
+        foreign_alias => "${rel}_alias",
+        self_alias    => $self->current_source_alias,
+      )->{condition},
+      { alias => "${rel}_alias" }
+    );
+}
+
+=head2 search_or
+
+ $rs->search_or([ $rs->method1, $rs->method2 ])
+
+Combine multiple ResultSet searches with OR logic. All ResultSets must
+share the same result source.
+
+=cut
+
+sub search_or {
+  my $self = shift;
+  my @others = @{shift @_};
+
+  $self->throw_exception(
+    'All ResultSets passed to search_or must have the same result_source'
+  ) if grep { $self->result_source != $_->result_source } @others;
+
+  $self->search({
+    -or => [ map $_->_resolved_attrs->{where}, @others ],
+  });
+}
+
+=head2 union
+
+ $rs1->union($rs2)
+ $rs1->union([$rs2, $rs3])
+
+=head2 union_all
+
+=head2 intersect
+
+=head2 intersect_all
+
+=head2 except
+
+=head2 except_all
+
+SQL set operations on ResultSets. All operands must select the same
+columns and use the same result class.
+
+=cut
+
+sub union         { $_[0]->_set_operation('UNION'         => $_[1]) }
+sub union_all     { $_[0]->_set_operation('UNION ALL'     => $_[1]) }
+sub intersect     { $_[0]->_set_operation('INTERSECT'     => $_[1]) }
+sub intersect_all { $_[0]->_set_operation('INTERSECT ALL' => $_[1]) }
+
+sub except {
+  my ($self, @args) = @_;
+  my $keyword = $self->result_source->schema->storage->sqlt_type eq 'Oracle'
+    ? 'MINUS' : 'EXCEPT';
+  $self->_set_operation($keyword => @args);
+}
+
+sub except_all { $_[0]->_set_operation('EXCEPT ALL' => $_[1]) }
+
+sub _set_operation {
+  my ($self, $operation, $other) = @_;
+
+  my @sql;
+  my @params;
+  my $as = $self->_resolved_attrs->{as};
+  my @operands = ($self, ref $other eq 'ARRAY' ? @$other : $other);
+
+  for (@operands) {
+    $self->throw_exception('ResultClass of ResultSets do not match!')
+      unless $self->result_class eq $_->result_class;
+
+    my $attrs = $_->_resolved_attrs;
+
+    my ($sql, @bind) = @{${$_->as_query}};
+    $sql =~ s/^\s*\((.*)\)\s*$/$1/;
+
+    push @sql, $sql;
+    push @params, @bind;
+  }
+
+  my $query = q<(> . join(" $operation ", @sql) . q<)>;
+  my $attrs = $self->_resolved_attrs;
+
+  return $self->result_source->resultset->search(undef, {
+    alias => $self->current_source_alias,
+    from => [{
+      $self->current_source_alias => \[ $query, @params ],
+      -alias                      => $self->current_source_alias,
+      -source_handle              => $self->result_source->handle,
+    }],
+    columns      => $attrs->{as},
+    result_class => $self->result_class,
+  });
+}
+
+# --- one_row: safe alternative to first() that exhausts cursor ---
+sub one_row {
+  my $self = shift;
+  $self->search(shift, { rows => 1 })->next;
+}
+
+# --- no_columns: clear column selection for custom projections ---
+sub no_columns { $_[0]->search(undef, { columns => [] }) }
+
+# --- bare: get unsearched ResultSet from a searched one ---
+sub bare { shift->result_source->resultset }
+
+# --- rand: get random rows ---
+sub rand {
+  my $self   = shift;
+  my $amount = @_ ? shift : 1;
+  $self->throw_exception('rand can only return a positive amount of rows')
+    unless $amount > 0;
+  $self->throw_exception('rand can only return an integer amount of rows')
+    unless $amount == int $amount;
+  my $rand_func = $self->result_source->storage->_random_function;
+  $self->search(undef, { rows => $amount, order_by => \$rand_func });
+}
+
+# --- explain: get query plan for debugging ---
+sub explain {
+  my $self = shift;
+  my $storage = $self->result_source->storage;
+  $storage->ensure_connected;
+  my $dbh = $storage->dbh;
+  my ($sql, @bind) = @{${$self->as_query}};
+  $sql =~ s/^\s*\((.*)\)\s*$/$1/s;
+  my $explain_sql = $storage->_explain_sql($sql);
+  $dbh->selectall_arrayref($explain_sql, undef, @bind);
+}
+
 1;
 
 __END__
@@ -4053,7 +4543,7 @@ These are in no particular order:
 Which column(s) to order the results by.
 
 [The full list of suitable values is documented in
-L<SQL::Abstract::Classic/"ORDER BY CLAUSES">; the following is a summary of
+L<SQL::Abstract/"ORDER BY CLAUSES">; the following is a summary of
 common options.]
 
 If a single column name, or an arrayref of names is supplied, the
@@ -4114,7 +4604,7 @@ chain such that it matches existing relationships:
 Like elsewhere, literal SQL or literal values can be included by using a
 scalar reference or a literal bind value, and these values will be available
 in the result with C<get_column> (see also
-L<SQL::Abstract::Classic>/Literal SQL and value type operators>):
+L<SQL::Abstract>/Literal SQL and value type operators>):
 
     # equivalent SQL: SELECT 1, 'a string', IF(my_column,?,?) ...
     # bind values: $true_value, $false_value
@@ -4574,7 +5064,7 @@ A arrayref of columns to group by. Can include columns of joined tables.
 The HAVING operator specifies a B<secondary> condition applied to the set
 after the grouping calculations have been done. In other words it is a
 constraint just like L</where> (and accepting the same
-L<SQL::Abstract::Classic syntax|SQL::Abstract::Classic/WHERE CLAUSES>) applied
+L<SQL::Abstract syntax|SQL::Abstract/WHERE CLAUSES>) applied
 to the data as it exists after GROUP BY has taken place. Specifying L</having>
 without L</group_by> is a logical mistake, and a fatal error on most RDBMS
 engines.
@@ -4619,7 +5109,7 @@ Adds to the WHERE clause.
 Can be overridden by passing C<< { where => undef } >> as an attribute
 to a resultset.
 
-For more complicated where clauses see L<SQL::Abstract::Classic/WHERE CLAUSES>.
+For more complicated where clauses see L<SQL::Abstract/WHERE CLAUSES>.
 
 =back
 

@@ -339,14 +339,7 @@ sub init_schema {
 
     my $schema;
 
-    if ($args{compose_connection}) {
-      $need_global_cleanup = 1;
-      $schema = DBICTest::Schema->compose_connection(
-                  'DBICTest', $self->_database(%args)
-                );
-    } else {
-      $schema = DBICTest::Schema->compose_namespace('DBICTest');
-    }
+    $schema = DBICTest::Schema->compose_namespace('DBICTest');
 
     if( $args{storage_type}) {
       $schema->storage_type($args{storage_type});

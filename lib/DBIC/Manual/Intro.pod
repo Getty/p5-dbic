@@ -4,9 +4,8 @@ DBIC::Manual::Intro - Introduction to DBIC
 
 =head1 INTRODUCTION
 
-You're bored with SQL, and want a native Perl interface for your database?  Or
-you've been doing this for a while with L<Class::DBI>, and think there's a
-better way?  You've come to the right place.
+You're bored with SQL, and want a native Perl interface for your database?
+You've come to the right place.
 
 =head1 THE DBIC WAY
 
@@ -288,8 +287,8 @@ instead:
   $album->set_column('title', 'Presence');
   $title = $album->get_column('title');
 
-Just like with L<Class::DBI>, you call C<update> to save your changes to the
-database (by executing the actual C<UPDATE> statement):
+Call C<update> to save your changes to the database (by executing the actual
+C<UPDATE> statement):
 
   $album->update;
 
@@ -376,7 +375,7 @@ Or you can provide your own C<WHERE> clause:
   my $rs    = $schema->resultset('Album')->search_literal( $where, @bind );
 
 The preferred way to generate complex queries is to provide a
-L<SQL::Abstract::Classic>-compatible construct to C<search>:
+L<SQL::Abstract>-compatible construct to C<search>:
 
   my $rs = $schema->resultset('Album')->search({
     artist  => { '!=', 'Janis Joplin' },

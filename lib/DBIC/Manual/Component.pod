@@ -6,9 +6,9 @@ DBIC::Manual::Component - Developing DBIC Components
 =head1 WHAT IS A COMPONENT
 
 A component is a module that can be added in to your DBIC
-classes to provide extra functionality. A good example is the PK::Auto
-component which automatically retrieves primary keys that the database
-itself creates, after the insert has happened.
+classes to provide extra functionality. A good example is
+L<DBIC::InflateColumn> which automatically inflates/deflates column
+values to and from Perl objects.
 
 =head1 USING
 
@@ -80,15 +80,11 @@ being called try printing out the current linearized MRO.
 These components provide extra functionality beyond
 basic functionality that you can't live without.
 
-L<DBIC::CDBICompat> - Class::DBI Compatibility layer.
-
 L<DBIC::FormTools> - Build forms with multiple interconnected objects.
 
 L<DBIC::HTMLWidget> - Like FromForm but with DBIC and HTML::Widget.
 
 L<DBIC::Ordered> - Modify the position of objects in an ordered list.
-
-L<DBIC::PK::Auto> - Retrieve automatically created primary keys upon insert.
 
 L<DBIC::QueriesTime> - Display the amount of time it takes to run queries.
 
@@ -115,8 +111,6 @@ DBIC' functionality.
 L<DBIC::Core> - Loads various components that "most people" would want.
 
 L<DBIC::AccessorGroup> - Lets you build groups of accessors.
-
-L<DBIC::DB> - Non-recommended classdata schema component.
 
 L<DBIC::InflateColumn> - Automatically create objects from column data.
 

@@ -47,9 +47,6 @@ Lists of modules by task to help you find the correct document.
 
 Got trouble? Let us shoot it for you.
 
-If you're using the CDBI Compat layer, we suggest reading the L<Class::DBI>
-documentation. It should behave the same way.
-
 =head2 L<DBIC::Manual::Component>
 
 Existing components, and documentation and example on how to

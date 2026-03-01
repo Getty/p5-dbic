@@ -61,8 +61,6 @@ sub _ident_values {
 =head2 ID
 
 Returns a unique id string identifying a result object by primary key.
-Used by L<DBIC::CDBICompat::LiveObjectIndex> and
-L<DBIC::ObjectCache>.
 
 =over
 
