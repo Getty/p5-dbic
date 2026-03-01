@@ -40,15 +40,6 @@ use Data::Dumper ();
 
 ## Skip all column type translation, as we want to use whatever the parser got.
 
-## Translate parsers -> PK::Auto::Foo, however
-
-my %parser2PK = (
-                 MySQL       => 'PK::Auto::MySQL',
-                 PostgreSQL  => 'PK::Auto::Pg',
-                 DB2         => 'PK::Auto::DB2',
-                 Oracle      => 'PK::Auto::Oracle',
-                 );
-
 sub produce
 {
     my ($translator) = @_;
@@ -62,11 +53,9 @@ sub produce
     # Steal the XML producers "prefix" arg for our namespace?
     my $dbixschema     = $translator->producer_args()->{prefix} ||
         $schema->name || 'My::Schema';
-    my $pkclass = $parser2PK{$translator->parser_type} || '';
 
     my %tt_vars = ();
     $tt_vars{dbixschema} = $dbixschema;
-    $tt_vars{pkclass} = $pkclass;
 
     my $schemaoutput .= << "DATA";
 
@@ -88,7 +77,7 @@ use base 'DBIC';
 use strict;
 use warnings;
 
-__PACKAGE__->load_components(qw/${pkclass} Core/);
+__PACKAGE__->load_components(qw/Core/);
 __PACKAGE__->table('${tname}');
 
 };

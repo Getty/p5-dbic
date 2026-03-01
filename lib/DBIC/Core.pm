@@ -8,7 +8,6 @@ use base qw/DBIC/;
 __PACKAGE__->load_components(qw/
   Relationship
   InflateColumn
-  PK::Auto
   PK
   Row
   ResultSourceProxy::Table
@@ -39,8 +38,6 @@ The core modules currently are:
 =item L<DBIC::InflateColumn>
 
 =item L<DBIC::Relationship> (See also L<DBIC::Relationship::Base>)
-
-=item L<DBIC::PK::Auto>
 
 =item L<DBIC::PK>
 

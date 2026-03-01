@@ -105,21 +105,9 @@ sub _run_connection_actions {
   $self->next::method(@_);
 }
 
-# we need to figure out what mysql version we're running
 sub sql_maker {
   my $self = shift;
-
-  # it is critical to get the version *before* calling next::method
-  # otherwise the potential connect will obliterate the sql_maker
-  # next::method will populate in the _sql_maker accessor
-  my $mysql_ver = $self->_server_info->{normalized_dbms_version};
-
-  my $sm = $self->next::method(@_);
-
-  # mysql 3 does not understand a bare JOIN
-  $sm->{_default_jointype} = 'INNER' if $mysql_ver < 4;
-
-  $sm;
+  $self->next::method(@_);
 }
 
 sub sqlt_type {
