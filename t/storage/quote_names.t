@@ -17,6 +17,12 @@ my %expected = (
   'DBIC::Storage::DBI::DB2'               =>
     { quote_char => '"',          name_sep => '.' },
 
+  'DBIC::Storage::DBI::Informix'          =>
+    { quote_char => '"',          name_sep => '.' },
+
+  'DBIC::Storage::DBI::InterBase'         =>
+    { quote_char => '"',          name_sep => '.' },
+
   'DBIC::Storage::DBI::mysql'             =>
     { quote_char => '`',          name_sep => '.' },
 
@@ -64,6 +70,9 @@ my %dbs = (
   MYSQL            => 'DBIC::Storage::DBI::mysql',
   DB2              => 'DBIC::Storage::DBI::DB2',
   SYBASE           => 'DBIC::Storage::DBI::Sybase::ASE',
+  FIREBIRD         => 'DBIC::Storage::DBI::InterBase',
+  FIREBIRD_ODBC    => 'DBIC::Storage::DBI::InterBase',
+  INFORMIX         => 'DBIC::Storage::DBI::Informix',
   MSSQL_ODBC       => 'DBIC::Storage::DBI::MSSQL',
 );
 
