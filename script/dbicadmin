@@ -1,4 +1,6 @@
 #!/usr/bin/env perl
+# PODNAME: dbicadmin
+# ABSTRACT: Utility for administrating DBIC schemata
 
 use strict;
 use warnings;

@@ -1,4 +1,5 @@
 package DBIC::ResultSetColumn;
+# ABSTRACT: helpful methods for messing with a single column of the resultset
 
 use strict;
 use warnings;
@@ -7,11 +8,6 @@ use base 'DBIC';
 use DBIC::Carp;
 use DBIC::_Util 'fail_on_internal_wantarray';
 use namespace::clean;
-
-=head1 NAME
-
-  DBIC::ResultSetColumn - helpful methods for messing
-  with a single column of the resultset
 
 =head1 SYNOPSIS
 
@@ -504,13 +500,6 @@ sub _resultset {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

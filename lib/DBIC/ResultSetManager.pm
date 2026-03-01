@@ -1,4 +1,5 @@
 package DBIC::ResultSetManager;
+# ABSTRACT: scheduled for deletion in 09000
 use strict;
 use warnings;
 use base 'DBIC';
@@ -11,10 +12,6 @@ migrate any and all code using it to explicit resultset classes using either
 __PACKAGE__->resultset_class(...) calls or by switching from using
 DBIC::Schema->load_classes() to load_namespaces() and creating
 appropriate My::Schema::ResultSet::* classes for it to pick up.";
-
-=head1 NAME
-
-DBIC::ResultSetManager - scheduled for deletion in 09000
 
 =head1 DESCRIPTION
 
@@ -91,13 +88,6 @@ sub _register_resultset_class {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

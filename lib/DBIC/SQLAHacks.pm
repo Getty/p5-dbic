@@ -1,6 +1,6 @@
 package # Hide from PAUSE
   DBIC::SQLAHacks;
-
+# ABSTRACT: Deprecated SQL customization layer
 use warnings;
 use strict;
 

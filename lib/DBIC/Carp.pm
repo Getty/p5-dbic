@@ -1,5 +1,6 @@
 package # hide from pause
   DBIC::Carp;
+# ABSTRACT: Provides advanced Carp::Clan-like warning functions for DBIC internals
 
 use strict;
 use warnings;
@@ -129,10 +130,6 @@ sub unimport {
 
 __END__
 
-=head1 NAME
-
-DBIC::Carp - Provides advanced Carp::Clan-like warning functions for DBIC internals
-
 =head1 DESCRIPTION
 
 Documentation is lacking on purpose - this an experiment not yet fit for
@@ -184,12 +181,5 @@ Like L</carp> but warns only once for the life of the perl interpreter
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut

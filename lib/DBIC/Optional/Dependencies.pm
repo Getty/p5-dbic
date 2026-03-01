@@ -1,5 +1,5 @@
 package DBIC::Optional::Dependencies;
-
+# ABSTRACT: Optional dependency declarations for DBIC
 use warnings;
 use strict;
 
@@ -112,7 +112,6 @@ my $reqs = {
       'Test::Moose'               => '0',
     },
   },
-
 
   admin => {
     req => {
@@ -506,7 +505,6 @@ sub req_list_for {
 
   return { %$deps };
 }
-
 
 sub die_unless_req_ok_for {
   my ($class, $group) = @_;

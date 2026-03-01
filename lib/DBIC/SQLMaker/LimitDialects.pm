@@ -1,6 +1,7 @@
 # because of how loose dep specs are, we need to keep squatting
 # on the CPAN face - FOREVER.
 package DBIC::SQLMaker::LimitDialects;
+# ABSTRACT: SQL::Abstract::Limit-like functionality in DBIC::SQLMaker
 
 use warnings;
 use strict;
@@ -30,10 +31,6 @@ sub __total_bindtype { $sigh->() }
 1;
 
 __END__
-
-=head1 NAME
-
-DBIC::SQLMaker::LimitDialects - SQL::Abstract::Limit-like functionality in DBIC::SQLMaker
 
 =head1 DESCRIPTION
 
@@ -74,7 +71,6 @@ Supported by B<MySQL> and any L<SQL::Statement> based DBD
    SELECT ...
   )
  ) WHERE RNO__ROW__INDEX BETWEEN ($offset+1) AND ($limit+$offset)
-
 
 ANSI standard Limit/Offset implementation. Supported by B<DB2> and
 B<< MSSQL >= 2005 >>.
@@ -181,9 +177,3 @@ Currently used by B<Sybase ASE>, due to lack of any other option.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

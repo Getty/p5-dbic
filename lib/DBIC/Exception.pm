@@ -1,4 +1,5 @@
 package DBIC::Exception;
+# ABSTRACT: Exception objects for DBIC
 
 use strict;
 use warnings;
@@ -13,10 +14,6 @@ use DBIC::Carp ();
 use overload
     '""' => sub { shift->{msg} },
     fallback => 1;
-
-=head1 NAME
-
-DBIC::Exception - Exception objects for DBIC
 
 =head1 DESCRIPTION
 
@@ -91,13 +88,6 @@ sub rethrow {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

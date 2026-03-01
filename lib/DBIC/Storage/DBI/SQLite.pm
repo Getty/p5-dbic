@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::SQLite;
+# ABSTRACT: Automatic primary key class for SQLite
 
 use strict;
 use warnings;
@@ -23,11 +24,6 @@ sub _determine_supports_multicolumn_in {
     ? 0
     : 1
 }
-
-
-=head1 NAME
-
-DBIC::Storage::DBI::SQLite - Automatic primary key class for SQLite
 
 =head1 SYNOPSIS
 
@@ -399,13 +395,6 @@ sub connect_call_use_foreign_keys {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

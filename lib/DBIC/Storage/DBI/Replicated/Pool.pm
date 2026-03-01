@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Replicated::Pool;
+# ABSTRACT: Manage a pool of replicants
 
 use Moose;
 use DBIC::Storage::DBI::Replicated::Replicant;
@@ -9,10 +10,6 @@ use DBIC::Storage::DBI::Replicated::Types 'DBICStorageDBI';
 use Try::Tiny;
 
 use namespace::clean -except => 'meta';
-
-=head1 NAME
-
-DBIC::Storage::DBI::Replicated::Pool - Manage a pool of replicants
 
 =head1 SYNOPSIS
 
@@ -412,13 +409,6 @@ sub validate_replicants {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

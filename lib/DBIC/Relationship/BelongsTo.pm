@@ -1,6 +1,6 @@
 package # hide from PAUSE
     DBIC::Relationship::BelongsTo;
-
+# ABSTRACT: belongs_to relationship declaration
 # Documentation for these methods can be found in
 # DBIC::Relationship
 

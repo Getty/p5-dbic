@@ -1,6 +1,6 @@
 package # Hide from PAUSE
   DBIC::SQLMaker::MySQL;
-
+# ABSTRACT: MySQL-specific SQL generation
 use warnings;
 use strict;
 

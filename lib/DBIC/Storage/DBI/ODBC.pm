@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::ODBC;
+# ABSTRACT: Base class for ODBC drivers
 use strict;
 use warnings;
 use base qw/DBIC::Storage::DBI/;
@@ -50,10 +51,6 @@ sub _disable_odbc_array_ops {
   }
 }
 
-=head1 NAME
-
-DBIC::Storage::DBI::ODBC - Base class for ODBC drivers
-
 =head1 DESCRIPTION
 
 This class simply provides a mechanism for discovering and loading a sub-class
@@ -62,13 +59,6 @@ for a specific ODBC backend.  It should be transparent to the user.
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

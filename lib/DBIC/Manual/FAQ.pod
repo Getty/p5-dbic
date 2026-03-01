@@ -1,6 +1,5 @@
-=head1 NAME
-
-DBIC::Manual::FAQ - Frequently Asked Questions (in theory)
+# PODNAME: DBIC::Manual::FAQ
+# ABSTRACT: Frequently Asked Questions (in theory)
 
 =head1 DESCRIPTION
 
@@ -536,7 +535,6 @@ With either of these methods the resulting use of the accessor would be
 
 	$result->update(); # would not inline the non_column_data accessor into the update
 
-
 =item How do I use DBIC objects in my TT templates?
 
 Like normal objects, mostly. However you need to watch out for TT
@@ -698,9 +696,3 @@ L<http://dev.mysql.com/doc/refman/5.1/en/resetting-permissions.html>.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

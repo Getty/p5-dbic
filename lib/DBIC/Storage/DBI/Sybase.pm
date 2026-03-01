@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Sybase;
+# ABSTRACT: Base class for drivers using L<DBD::Sybase>
 
 use strict;
 use warnings;
@@ -6,11 +7,6 @@ use Try::Tiny;
 use namespace::clean;
 
 use base qw/DBIC::Storage::DBI/;
-
-=head1 NAME
-
-DBIC::Storage::DBI::Sybase - Base class for drivers using
-L<DBD::Sybase>
 
 =head1 DESCRIPTION
 
@@ -118,13 +114,6 @@ sub _using_freetds_version {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

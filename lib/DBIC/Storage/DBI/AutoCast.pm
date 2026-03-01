@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::AutoCast;
+# ABSTRACT: Storage component for RDBMS requiring explicit placeholder typing
 
 use strict;
 use warnings;
@@ -7,10 +8,6 @@ use base qw/DBIC::Storage::DBI/;
 use mro 'c3';
 
 __PACKAGE__->mk_group_accessors('simple' => 'auto_cast' );
-
-=head1 NAME
-
-DBIC::Storage::DBI::AutoCast - Storage component for RDBMS requiring explicit placeholder typing
 
 =head1 SYNOPSIS
 
@@ -81,13 +78,6 @@ sub connect_call_set_auto_cast {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

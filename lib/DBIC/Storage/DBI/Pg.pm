@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Pg;
+# ABSTRACT: Automatic primary key class for PostgreSQL
 
 use strict;
 use warnings;
@@ -157,7 +158,6 @@ EOS
   return $seq_expr;
 }
 
-
 sub sqlt_type {
   return 'PostgreSQL';
 }
@@ -249,10 +249,6 @@ sub deployment_statements {
 
 __END__
 
-=head1 NAME
-
-DBIC::Storage::DBI::Pg - Automatic primary key class for PostgreSQL
-
 =head1 SYNOPSIS
 
   # In your result (table) classes
@@ -288,9 +284,3 @@ option to connect(), for example:
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

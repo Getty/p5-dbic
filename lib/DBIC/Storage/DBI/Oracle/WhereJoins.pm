@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Oracle::WhereJoins;
+# ABSTRACT: Oracle joins in WHERE syntax support (instead of ANSI).
 
 use strict;
 use warnings;
@@ -13,11 +14,6 @@ __PACKAGE__->sql_maker_class('DBIC::SQLMaker::OracleJoins');
 __END__
 
 =pod
-
-=head1 NAME
-
-DBIC::Storage::DBI::Oracle::WhereJoins - Oracle joins in WHERE syntax
-support (instead of ANSI).
 
 =head1 PURPOSE
 
@@ -72,9 +68,3 @@ Probably lots more.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

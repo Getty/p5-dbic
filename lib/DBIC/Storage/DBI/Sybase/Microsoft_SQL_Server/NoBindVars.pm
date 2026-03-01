@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Sybase::Microsoft_SQL_Server::NoBindVars;
+# ABSTRACT: Support for Microsoft SQL Server via DBD::Sybase without placeholders
 
 use strict;
 use warnings;
@@ -17,11 +18,6 @@ sub _init {
 }
 
 1;
-
-=head1 NAME
-
-DBIC::Storage::DBI::Sybase::Microsoft_SQL_Server::NoBindVars - Support for Microsoft
-SQL Server via DBD::Sybase without placeholders
 
 =head1 SYNOPSIS
 
@@ -47,9 +43,3 @@ L<DBIC::Storage::DBI::Sybase::Microsoft_SQL_Server>.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

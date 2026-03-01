@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Replicated::WithDSN;
+# ABSTRACT: A DBI Storage Role with DSN information in trace output
 
 use Moose::Role;
 use Scalar::Util 'reftype';
@@ -6,11 +7,6 @@ requires qw/_query_start/;
 
 use Try::Tiny;
 use namespace::clean -except => 'meta';
-
-=head1 NAME
-
-DBIC::Storage::DBI::Replicated::WithDSN - A DBI Storage Role with DSN
-information in trace output
 
 =head1 SYNOPSIS
 
@@ -60,13 +56,6 @@ L<DBIC::Storage::DBI>
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

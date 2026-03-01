@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Sybase::FreeTDS;
+# ABSTRACT: Base class for drivers using DBD::Sybase over FreeTDS.
 
 use strict;
 use warnings;
@@ -6,11 +7,6 @@ use base qw/DBIC::Storage::DBI::Sybase/;
 use mro 'c3';
 use Try::Tiny;
 use namespace::clean;
-
-=head1 NAME
-
-DBIC::Storage::DBI::Sybase::FreeTDS - Base class for drivers using
-DBD::Sybase over FreeTDS.
 
 =head1 DESCRIPTION
 
@@ -106,13 +102,6 @@ sub _exec_txn_rollback {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

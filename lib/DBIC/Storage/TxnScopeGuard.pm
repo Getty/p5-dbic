@@ -1,4 +1,5 @@
 package DBIC::Storage::TxnScopeGuard;
+# ABSTRACT: Scope-based transaction handling
 
 use strict;
 use warnings;
@@ -130,10 +131,6 @@ sub DESTROY {
 
 __END__
 
-=head1 NAME
-
-DBIC::Storage::TxnScopeGuard - Scope-based transaction handling
-
 =head1 SYNOPSIS
 
  sub foo {
@@ -183,9 +180,3 @@ L<Scope::Guard> by chocolateboy (inspiration for this module)
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

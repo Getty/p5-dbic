@@ -1,6 +1,6 @@
 package   #hide from PAUSE
   DBIC::Storage::DBIHacks;
-
+# ABSTRACT: DBI storage internals and query manipulation
 #
 # This module contains code supporting a battery of special cases and tests for
 # many corner cases pushing the envelope of what DBIC can do. When work on
@@ -277,7 +277,6 @@ sub _adjust_select_args_for_complex_prefetch {
 
   # work on a shallow copy
   my @orig_from = @{$attrs->{from}};
-
 
   $outer_attrs->{from} = \ my @outer_from;
 

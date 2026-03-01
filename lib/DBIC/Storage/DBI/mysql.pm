@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::mysql;
+# ABSTRACT: Storage::DBI class implementing MySQL specifics
 
 use strict;
 use warnings;
@@ -40,7 +41,6 @@ sub _prep_for_execute {
   # Insert referencing the same table (i.e. SELECT MAX(id) + 1) seems
   # to work just fine on MySQL
   return $self->next::method(@_) if ( $_[0] eq 'select' or $_[0] eq 'insert' );
-
 
   # FIXME FIXME FIXME - this is a terrible, gross, incomplete, MySQL-specific
   # hack but it works rather well for the limited amount of actual use cases
@@ -164,10 +164,6 @@ sub lag_behind_master {
 
 1;
 
-=head1 NAME
-
-DBIC::Storage::DBI::mysql - Storage::DBI class implementing MySQL specifics
-
 =head1 SYNOPSIS
 
 Storage::DBI autodetects the underlying MySQL database, and re-blesses the
@@ -182,7 +178,6 @@ like AutoIncrement column support and savepoints. Also it augments the
 SQL maker to support the MySQL-specific C<STRAIGHT_JOIN> join type, which
 you can use by specifying C<< join_type => 'straight' >> in the
 L<relationship attributes|DBIC::Relationship::Base/join_type>
-
 
 It also provides a one-stop on-connect macro C<set_strict_mode> which sets
 session variables such that MySQL behaves more predictably as far as the
@@ -205,9 +200,3 @@ Enables session-wide strict options upon connecting. Equivalent to:
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

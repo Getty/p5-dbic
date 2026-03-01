@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI;
+# ABSTRACT: DBI storage handler
 # -*- mode: cperl; cperl-indent-level: 2 -*-
 
 use strict;
@@ -42,7 +43,6 @@ my @storage_options = qw/
   disable_sth_caching unsafe auto_savepoint
 /;
 __PACKAGE__->mk_group_accessors('simple' => @storage_options);
-
 
 # capability definitions, using a 2-tiered accessor system
 # The rationale is:
@@ -153,10 +153,6 @@ for my $meth (keys %$storage_accessor_idx, qw(
     goto $orig;
 EOC
 }
-
-=head1 NAME
-
-DBIC::Storage::DBI - DBI storage handler
 
 =head1 SYNOPSIS
 
@@ -364,7 +360,6 @@ L<DBI> connection attributes, or placed in a separate hashref
 Every time C<connect_info> is invoked, any previous settings for
 these options will be cleared before setting the new ones, regardless of
 whether any options are specified in the new C<connect_info>.
-
 
 =over
 
@@ -609,8 +604,6 @@ L<DBIC::Schema/connect>
     ]
   );
 
-
-
 =cut
 
 sub connect_info {
@@ -691,7 +684,6 @@ sub _dbi_connect_info {
 
   return $conninfo;
 }
-
 
 sub _normalize_connect_info {
   my ($self, $info_arg) = @_;
@@ -1102,8 +1094,6 @@ sub _run_connection_actions {
     $_[0]->_do_connection_actions(connect_call_ => [[ rebase_sqlmaker => 'DBICDevRel::SQLAC::SwapOut' ]]);
   }
 }
-
-
 
 sub set_use_dbms_capability {
   $_[0]->set_inherited ($_[1], $_[2]);
@@ -1532,9 +1522,7 @@ mix and match old and new within the same codebase as follows:
   );
   << your new code goes here >>
 
-
   ... and then ...
-
 
   my $experimental_schema = $original_schema->connect(
     sub {
@@ -2591,7 +2579,6 @@ sub update {
   shift->_execute('update', @_);
 }
 
-
 sub delete {
   #my ($self, $source, @args) = @_;
   shift->_execute('delete', @_);
@@ -3003,7 +2990,6 @@ sub is_datatype_numeric {
   ) $/ix;
 }
 
-
 =head2 create_ddl_dir
 
 =over 4
@@ -3053,7 +3039,6 @@ merged with the hash passed in. To disable any of those features, pass in a
 hashref like the following
 
  { ignore_constraint_names => 0, # ... other options }
-
 
 WARNING: You are strongly advised to check all SQL files created, before applying
 them.
@@ -3341,7 +3326,6 @@ sub build_datetime_parser {
   return $type;
 }
 
-
 =head2 is_replicating
 
 A boolean that reports if a particular L<DBIC::Storage::DBI> is set to
@@ -3497,9 +3481,3 @@ be with raw DBI.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

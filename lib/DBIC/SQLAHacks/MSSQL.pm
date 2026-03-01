@@ -1,6 +1,6 @@
 package # Hide from PAUSE
   DBIC::SQLAHacks::MSSQL;
-
+# ABSTRACT: Deprecated MSSQL SQL customizations
 use warnings;
 use strict;
 

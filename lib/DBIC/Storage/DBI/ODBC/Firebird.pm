@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::ODBC::Firebird;
+# ABSTRACT: Driver for using the Firebird RDBMS through ODBC
 
 use strict;
 use warnings;
@@ -9,11 +10,6 @@ use base qw/
 use mro 'c3';
 use Try::Tiny;
 use namespace::clean;
-
-=head1 NAME
-
-DBIC::Storage::DBI::ODBC::Firebird - Driver for using the Firebird RDBMS
-through ODBC
 
 =head1 DESCRIPTION
 
@@ -62,14 +58,6 @@ sub _exec_svp_rollback {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
-
 
 =cut
 

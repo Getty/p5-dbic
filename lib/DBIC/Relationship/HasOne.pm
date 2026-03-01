@@ -1,6 +1,6 @@
 package # hide from PAUSE
     DBIC::Relationship::HasOne;
-
+# ABSTRACT: has_one relationship declaration
 use strict;
 use warnings;
 use DBIC::Carp;

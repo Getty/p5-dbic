@@ -1,4 +1,5 @@
 package DBIC::Admin;
+# ABSTRACT: Administration object for schemas
 
 # check deps
 BEGIN {
@@ -16,10 +17,6 @@ use MooseX::Types::Path::Class qw(Dir File);
 use MooseX::Types::LoadableClass qw(LoadableClass);
 use Try::Tiny;
 use namespace::clean;
-
-=head1 NAME
-
-DBIC::Admin - Administration object for schemas
 
 =head1 SYNOPSIS
 
@@ -72,7 +69,6 @@ has 'schema_class' => (
   isa => LoadableClass,
 );
 
-
 =head2 schema
 
 A pre-connected schema object can be provided for manipulation
@@ -103,7 +99,6 @@ has 'resultset' => (
   isa => Str,
 );
 
-
 =head2 where
 
 a hash ref or json string to be used for identifying data to manipulate
@@ -115,7 +110,6 @@ has 'where' => (
   isa     => DBICHashRef,
   coerce  => 1,
 );
-
 
 =head2 set
 
@@ -129,7 +123,6 @@ has 'set' => (
   coerce  => 1,
 );
 
-
 =head2 attrs
 
 a hash ref or json string to be used for passing additional info to the ->search call
@@ -141,7 +134,6 @@ has 'attrs' => (
   isa     => DBICHashRef,
   coerce  => 1,
 );
-
 
 =head2 connect_info
 
@@ -161,7 +153,6 @@ sub _build_connect_info {
   return $self->_find_stanza($self->config, $self->config_stanza);
 }
 
-
 =head2 config_file
 
 config_file provide a config_file to read connect_info from, if this is provided
@@ -176,7 +167,6 @@ has config_file => (
   coerce  => 1,
 );
 
-
 =head2 config_stanza
 
 config_stanza for use with config_file should be a '::' delimited 'path' to the connection information
@@ -188,7 +178,6 @@ has 'config_stanza' => (
   is  => 'ro',
   isa => Str,
 );
-
 
 =head2 config
 
@@ -216,7 +205,6 @@ sub _build_config {
   return $cfg;
 }
 
-
 =head2 sql_dir
 
 The location where sql ddl files should be created or found for an upgrade.
@@ -228,7 +216,6 @@ has 'sql_dir' => (
   isa     => Dir,
   coerce  => 1,
 );
-
 
 =head2 sql_type
 
@@ -252,7 +239,6 @@ has version => (
   isa => Str,
 );
 
-
 =head2 preversion
 
 Previous version of the schema to create an upgrade diff for, the full sql for that version of the sql must be in the sql_dir
@@ -264,7 +250,6 @@ has preversion => (
   isa => Str,
 );
 
-
 =head2 force
 
 Try and force certain operations.
@@ -275,7 +260,6 @@ has force => (
   is  => 'rw',
   isa => Bool,
 );
-
 
 =head2 quiet
 
@@ -293,7 +277,6 @@ has '_confirm' => (
   isa => Bool,
 );
 
-
 =head2 trace
 
 Toggle DBIC debug output
@@ -310,7 +293,6 @@ sub _trigger_trace {
     my ($self, $new, $old) = @_;
     $self->schema->storage->debug($new);
 }
-
 
 =head1 METHODS
 
@@ -345,7 +327,6 @@ sub create {
   $schema->create_ddl_dir( $sqlt_type, (defined $schema->schema_version ? $schema->schema_version : ""), $self->sql_dir->stringify, $preversion, $sqlt_args );
 }
 
-
 =head2 upgrade
 
 =over 4
@@ -372,7 +353,6 @@ sub upgrade {
     return $ret;
   }
 }
-
 
 =head2 install
 
@@ -411,7 +391,6 @@ sub install {
   }
 
 }
-
 
 =head2 deploy
 
@@ -455,7 +434,6 @@ sub insert {
   print ''.ref($resultset).' ID: '.join(',',$obj->id())."\n" if (!$self->quiet);
 }
 
-
 =head2 update
 
 =over 4
@@ -486,7 +464,6 @@ sub update {
   }
 }
 
-
 =head2 delete
 
 =over 4
@@ -516,7 +493,6 @@ sub delete {
     $resultset->delete_all();
   }
 }
-
 
 =head2 select
 
@@ -585,13 +561,6 @@ sub _find_stanza {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

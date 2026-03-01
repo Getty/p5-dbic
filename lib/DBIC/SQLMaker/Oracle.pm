@@ -1,6 +1,6 @@
 package # Hide from PAUSE
   DBIC::SQLMaker::Oracle;
-
+# ABSTRACT: Oracle-specific SQL generation
 use warnings;
 use strict;
 
@@ -27,7 +27,6 @@ sub _assemble_binds {
   my $self = shift;
   return map { @{ (delete $self->{"${_}_bind"}) || [] } } (qw/pre_select select from where oracle_connect_by group having order limit/);
 }
-
 
 sub _parse_rs_attrs {
     my $self = shift;

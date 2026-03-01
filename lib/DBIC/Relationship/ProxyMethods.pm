@@ -1,6 +1,6 @@
 package # hide from PAUSE
     DBIC::Relationship::ProxyMethods;
-
+# ABSTRACT: Proxy methods for related objects
 use strict;
 use warnings;
 use base 'DBIC';

@@ -1,4 +1,5 @@
 package DBIC::ResultSet;
+# ABSTRACT: Represents a query used for fetching a set of results.
 
 use strict;
 use warnings;
@@ -30,10 +31,6 @@ use overload
 sub _bool () { 1 }
 
 __PACKAGE__->mk_group_accessors('simple' => qw/_result_class result_source/);
-
-=head1 NAME
-
-DBIC::ResultSet - Represents a query used for fetching a set of results.
 
 =head1 SYNOPSIS
 
@@ -516,7 +513,6 @@ sub search_rs {
       }
     }
 
-
     # join/prefetch use their own crazy merging heuristics
     foreach my $key (qw/join prefetch/) {
       $new_attrs->{$key} = $self->_merge_joinpref_attr($old_attrs->{$key}, $call_attrs->{$key})
@@ -526,7 +522,6 @@ sub search_rs {
     # stack binds together
     $new_attrs->{bind} = [ @{ $old_attrs->{bind} || [] }, @{ $call_attrs->{bind} || [] } ];
   }
-
 
   for ($old_where, $call_cond) {
     if (defined $_) {
@@ -635,7 +630,6 @@ sub _normalize_selection {
         "Unable to process named '+select', resultset contains an unnamed selector $attrs->{_dark_selector}{string}"
       );
     }
-
 
     # merge result
     $attrs->{"${pref}select"} = $self->_merge_attr($attrs->{"${pref}select"}, $sel);
@@ -929,7 +923,6 @@ sub _non_unique_find_fallback {
       : $self->{attrs}{alias}
   );
 }
-
 
 sub _qualify_cond_columns {
   my ($self, $cond, $alias) = @_;
@@ -1385,7 +1378,6 @@ sub _construct_results {
     )
   ) ? 1 : 0 ) unless defined $self->{_result_inflator}{is_hri};
 
-
   if ($attrs->{_simple_passthrough_construction}) {
     # construct a much simpler array->hash folder for the one-table HRI cases right here
     if ($self->{_result_inflator}{is_hri}) {
@@ -1765,7 +1757,6 @@ sub _count_subq_rs {
                   ->get_column ('count');
 }
 
-
 =head2 count_literal
 
 B<CAVEAT>: C<count_literal> is a legacy convenience method.
@@ -1864,7 +1855,6 @@ an object for the first result (or C<undef> if the resultset is empty).
 sub first {
   return $_[0]->reset->next;
 }
-
 
 # _rs_update_delete
 #
@@ -2985,7 +2975,6 @@ sub find_or_create {
 Like L</find_or_create>, but if a row is found it is immediately updated via
 C<< $found_row->update (\%col_data) >>.
 
-
 Takes an optional C<key> attribute to search on a specific unique constraint.
 For example:
 
@@ -3254,7 +3243,6 @@ sub related_resultset {
     # left joins to inner, so we get the expected results
     # read the comment on top of the actual function to see what this does
     $attrs->{from} = $rsrc->schema->storage->_inner_join_to_node ($attrs->{from}, $alias);
-
 
     #XXX - temp fix for result_class bug. There likely is a more elegant fix -groditi
     delete @{$attrs}{qw(result_class alias)};
@@ -4000,7 +3988,6 @@ sub STORABLE_thaw {
 
   $self;
 }
-
 
 =head2 throw_exception
 
@@ -5161,8 +5148,6 @@ Here are some more involved examples, based on the following relationship map:
 
   My::Schema::Track->has_many( guests => 'My::Schema::Guest' );
 
-
-
   my $rs = $schema->resultset('Tag')->search(
     undef,
     {
@@ -5320,12 +5305,5 @@ supported:
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut

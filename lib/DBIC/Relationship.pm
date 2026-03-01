@@ -1,4 +1,5 @@
 package DBIC::Relationship;
+# ABSTRACT: Inter-table relationships
 
 use strict;
 use warnings;
@@ -16,10 +17,6 @@ __PACKAGE__->load_own_components(qw/
 1;
 
 __END__
-
-=head1 NAME
-
-DBIC::Relationship - Inter-table relationships
 
 =head1 SYNOPSIS
 
@@ -119,7 +116,6 @@ definition of the C<cond> argument.
 
 See L<DBIC::Relationship::Base/attributes> for documentation on the
 attributes that are allowed in the C<attrs> argument.
-
 
 =head2 belongs_to
 
@@ -300,7 +296,6 @@ more info see L<DBIC::Relationship::Base/condition>.
     'My::DBIC::Schema::Book',
   );
 
-
   # Usage
   # resultset of Books belonging to author
   my $booklist = $author->books;
@@ -322,7 +317,6 @@ more info see L<DBIC::Relationship::Base/condition>.
   $author->create_related('books', \%col_data);
   # alternative method for the above
   $author->add_to_books(\%col_data);
-
 
 Three methods are created when you create a has_many relationship.
 The first method is the expected accessor method, C<$accessor_name()>.
@@ -636,9 +630,3 @@ relationships as well.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

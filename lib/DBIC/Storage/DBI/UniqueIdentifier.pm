@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::UniqueIdentifier;
+# ABSTRACT: Storage component for RDBMSes supporting GUID types
 
 use strict;
 use warnings;
@@ -6,11 +7,6 @@ use base 'DBIC::Storage::DBI';
 use mro 'c3';
 
 __PACKAGE__->mk_group_accessors(inherited => 'new_guid');
-
-=head1 NAME
-
-DBIC::Storage::DBI::UniqueIdentifier - Storage component for RDBMSes
-supporting GUID types
 
 =head1 DESCRIPTION
 
@@ -109,13 +105,6 @@ sub _prefetch_autovalues  {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

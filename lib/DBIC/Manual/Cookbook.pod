@@ -1,6 +1,5 @@
-=head1 NAME
-
-DBIC::Manual::Cookbook - Miscellaneous recipes
+# PODNAME: DBIC::Manual::Cookbook
+# ABSTRACT: Miscellaneous recipes
 
 =head1 SEARCHING
 
@@ -84,7 +83,6 @@ _not_ accept search attributes. However one can always chain a single() to
 a search():
 
   my $top_cd = $cd_rs->search({}, { order_by => 'rating' })->single;
-
 
 =item *
 
@@ -228,7 +226,6 @@ generated SQL via the C<-as> field attribute as follows:
   #   FROM artist me LEFT JOIN cd cds ON cds.artist = me.artistid
   # GROUP BY me.artistid, me.name, me.rank, me.charfield
   # ORDER BY amount_of_cds DESC
-
 
 If your alias exists as a column in your base class (i.e. it was added with
 L<add_columns|DBIC::ResultSource/add_columns>), you just access it as
@@ -865,7 +862,6 @@ B<Schema Definition>
 
     1;
 
-
 B<Proxy-Class definitions>
 
     package My::Schema::Result::User;
@@ -901,7 +897,6 @@ B<Proxy-Class definitions>
     }
 
     1;
-
 
     package My::Schema::Result::User::Admin;
 
@@ -1077,7 +1072,6 @@ L<set_cache|DBIC::ResultSet/set_cache> method:
  my $new_rs = $self->result_source->resultset;
  $new_rs->set_cache(\@uploadable_groups);
  return $new_rs;
-
 
 =head1 USING RELATIONSHIPS
 
@@ -1565,8 +1559,6 @@ C<oracles.heavily(nested(functions_can('take', 'lots'), OF), 'args')>
   as       => [ 'world' ],
   group_by => [ 'cube( 1, 2, 3, 4 )' ],
 
-
-
 =head2 Adding Indexes And Functions To Your SQL
 
 Often you will want indexes on columns on your table to speed up searching. To
@@ -1611,7 +1603,6 @@ You could also add views, procedures or triggers to the output using
 L<SQL::Translator::Schema/add_view>,
 L<SQL::Translator::Schema/add_procedure> or
 L<SQL::Translator::Schema/add_trigger>.
-
 
 =head2 Schema versioning
 
@@ -1817,7 +1808,6 @@ database if the C<mysql_enable_utf8> is set in the connect options.
                                       $user, $pass,
                                       { mysql_enable_utf8 => 1} );
 
-
 When set, a data retrieved from a textual column type (char,
 varchar, etc) will have the UTF-8 flag turned on if necessary. This
 enables character semantics on that string. You will also need to
@@ -1981,7 +1971,6 @@ L<DBIC::Storage::TxnScopeGuard>:
 
     return $self
   }
-
 
 =head2 Wrapping/overloading a column accessor
 
@@ -2271,9 +2260,3 @@ You can accomplish this with L<Tie::Cache> or L<Tie::Cache::LRU>:
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

@@ -59,12 +59,7 @@ use warnings;
 
 __PACKAGE__->register_class('TableCompat', 'DBIC::Version::TableCompat');
 
-
 # ---------------------------------------------------------------------------
-
-=head1 NAME
-
-DBIC::Schema::Versioned - DBIC::Schema plugin for Schema upgrades
 
 =head1 SYNOPSIS
 
@@ -78,7 +73,6 @@ DBIC::Schema::Versioned - DBIC::Schema plugin for Schema upgrades
 
   __PACKAGE__->load_components(qw/Schema::Versioned/);
   __PACKAGE__->upgrade_directory('/path/to/upgrades/');
-
 
 =head1 DESCRIPTION
 
@@ -196,6 +190,7 @@ and then you're good to go.
 =cut
 
 package DBIC::Schema::Versioned;
+# ABSTRACT: DBIC::Schema plugin for Schema upgrades
 
 use strict;
 use warnings;
@@ -212,7 +207,6 @@ __PACKAGE__->mk_classdata('upgrade_directory');
 __PACKAGE__->mk_classdata('backup_directory');
 __PACKAGE__->mk_classdata('do_backup');
 __PACKAGE__->mk_classdata('do_diff_on_init');
-
 
 =head1 METHODS
 
@@ -694,7 +688,6 @@ sub _create_db_to_schema_diff {
   carp "WARNING: There may be differences between your DB and your DBIC schema. Please review and if necessary run the SQL in $filename to sync your DB.";
 }
 
-
 sub _set_db_version {
   my $self = shift;
   my ($params) = @_;
@@ -764,13 +757,6 @@ sub _source_exists
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

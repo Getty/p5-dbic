@@ -1,4 +1,5 @@
 package DBIC::Row;
+# ABSTRACT: Basic row methods
 
 use strict;
 use warnings;
@@ -24,10 +25,6 @@ BEGIN {
 use namespace::clean;
 
 __PACKAGE__->mk_group_accessors ( simple => [ in_storage => '_in_storage' ] );
-
-=head1 NAME
-
-DBIC::Row - Basic row methods
 
 =head1 SYNOPSIS
 
@@ -484,7 +481,6 @@ are invoked.
 
 Creating a result object using L<DBIC::ResultSet/new_result>, or
 calling L</delete> on one, sets it to false.
-
 
 =head2 update
 
@@ -1576,7 +1572,6 @@ sub throw_exception {
   }
 }
 
-
 # ============================================================
 # Integrated helper methods (from DBIx::Class::Helpers by FREW)
 # ============================================================
@@ -1671,13 +1666,6 @@ Actually implemented in L<DBIC::PK>
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

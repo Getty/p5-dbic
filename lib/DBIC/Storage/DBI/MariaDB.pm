@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::MariaDB;
+# ABSTRACT: Storage::DBI class implementing MariaDB specifics
 
 use strict;
 use warnings;
@@ -40,10 +41,6 @@ sub lag_behind_master {
 
 1;
 
-=head1 NAME
-
-DBIC::Storage::DBI::MariaDB - Storage::DBI class implementing MariaDB specifics
-
 =head1 SYNOPSIS
 
 Storage::DBI autodetects the underlying MariaDB database when using
@@ -78,9 +75,3 @@ differences handled here are:
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

@@ -1,5 +1,6 @@
 package # hide from pause until we figure it all out
   DBIC::Storage::BlockRunner;
+# ABSTRACT: Try running a block of code until success with a configurable retry logic
 
 use warnings;
 use strict;
@@ -12,10 +13,6 @@ use Scalar::Util qw(weaken blessed reftype);
 use Try::Tiny;
 use Moo;
 use namespace::clean;
-
-=head1 NAME
-
-DBIC::Storage::BlockRunner - Try running a block of code until success with a configurable retry logic
 
 =head1 DESCRIPTION
 
@@ -229,13 +226,6 @@ sub _run {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

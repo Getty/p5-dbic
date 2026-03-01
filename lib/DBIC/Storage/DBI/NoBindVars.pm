@@ -1,14 +1,11 @@
 package DBIC::Storage::DBI::NoBindVars;
+# ABSTRACT: Sometime DBDs have poor to no support for bind variables
 
 use strict;
 use warnings;
 
 use base 'DBIC::Storage::DBI';
 use mro 'c3';
-
-=head1 NAME
-
-DBIC::Storage::DBI::NoBindVars - Sometime DBDs have poor to no support for bind variables
 
 =head1 DESCRIPTION
 
@@ -117,13 +114,6 @@ sub _prep_interpolated_value {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

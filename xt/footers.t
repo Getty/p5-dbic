@@ -4,17 +4,12 @@ use strict;
 use Test::More;
 use File::Find;
 
-my $boilerplate_headings = q{
+# PodWeaver now generates =head1 COPYRIGHT AND LICENSE,
+# so we only check for the FURTHER QUESTIONS? boilerplate in source
+my $further_questions = q{
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 };
 
 find({
@@ -26,12 +21,11 @@ find({
 
     my $data = do { local (@ARGV, $/) = $fn; <> };
 
-    if ($data !~ /^=head1 NAME/m) {
-
+    if ($data !~ /^=head1/m) {
+      # No POD at all — skip
+    }
+    elsif ($fn =~ qr{\Qlib/DBIC/Optional/Dependencies.pm}) {
       # the generator is full of false positives, .pod is where it's at
-      return if $fn =~ qr{\Qlib/DBIC/Optional/Dependencies.pm};
-
-      ok ( $data !~ /\bcopyright\b/i, "No copyright notices in $fn without apparent POD" );
     }
     elsif ($fn =~ qr{\Qlib/DBIC.}) {
       # nothing to check there - a static set of words
@@ -40,9 +34,10 @@ find({
       ok ( $data !~ / ^ =head1 \s $_ /xmi, "No standalone $_ headings in $fn" )
         for qw(AUTHOR CONTRIBUTOR LICENSE LICENCE);
 
-      ok ( $data !~ / ^ =head1 \s COPYRIGHT \s (?! AND \s LICENSE )/xmi, "No standalone COPYRIGHT headings in $fn" );
+      ok ( $data !~ / ^ =head1 \s COPYRIGHT /xmi, "No COPYRIGHT headings in source $fn (PodWeaver generates this)" );
 
-      ok ($data =~ / \Q$boilerplate_headings\E (?! .*? ^ =head )/xms, "Expected headings found at the end of $fn");
+      ok ($data =~ / \Q$further_questions\E /xms, "Expected FURTHER QUESTIONS? section found in $fn")
+        if $data =~ /^=head1 \s+ (?:DESCRIPTION|SYNOPSIS)/xm;
     }
   },
   no_chdir => 1,

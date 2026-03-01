@@ -1,4 +1,5 @@
 package DBIC::ResultSet::Pager;
+# ABSTRACT: help when paging through sets of results
 
 use warnings;
 use strict;
@@ -17,7 +18,6 @@ sub new {
 
   return $self;
 }
-
 
 sub entries_per_page {
   my $self = shift;
@@ -68,7 +68,6 @@ sub total_entries {
 
   $self->{total_entries};
 }
-
 
 sub entries_on_this_page {
   my $self = shift;
@@ -168,10 +167,6 @@ sub change_entries_per_page {
 
 __END__
 
-=head1 NAME
-
-DBIC::ResultSet::Pager - help when paging through sets of results
-
 =head1 SYNOPSIS
 
   use DBIC::ResultSet::Pager;
@@ -197,13 +192,7 @@ L</total_entries> which was the only part originally provided by
 L<DBIC::ResultSet::Pager>. This module passes the entire contemporary
 test suite of L<Data::Page> unmodified.
 
-
-
-
 B<WHAT FOLLOWS IS A VERBATIM COPY OF Data::Page's 2.02 DOCUMENTATION>
-
-
-
 
 When searching through large amounts of data, it is often the case
 that a result set is returned that is larger than we want to display
@@ -347,9 +336,3 @@ Leon Brocard <acme@astray.com>, and few enhancements by James Laver (ELPENGUIN)
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

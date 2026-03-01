@@ -1,4 +1,5 @@
 package DBIC::InflateColumn::File;
+# ABSTRACT: DEPRECATED (superseded by DBIC::InflateColumn::FS)
 
 use strict;
 use warnings;
@@ -18,8 +19,6 @@ carp 'InflateColumn::File has entered a deprecation cycle. This component '
     .'DBIC::InflateColumn::FS. You can set the environment variable '
     .'DBIC_IC_FILE_NOWARN to a true value to disable  this warning.'
 unless $ENV{DBIC_IC_FILE_NOWARN};
-
-
 
 __PACKAGE__->load_components(qw/InflateColumn/);
 
@@ -101,7 +100,6 @@ sub insert {
     return $self;
 }
 
-
 sub _inflate_file_column {
     my ( $self, $column, $value ) = @_;
 
@@ -126,10 +124,6 @@ sub _save_file_column {
 
     return $value->{filename};
 }
-
-=head1 NAME
-
-DBIC::InflateColumn::File -  DEPRECATED (superseded by DBIC::InflateColumn::FS)
 
 =head2 Deprecation Notice
 
@@ -171,7 +165,6 @@ In your L<DBIC> table class:
         },
     );
 
-
 In your L<Catalyst::Controller> class:
 
 FileColumn requires a hash that contains L<IO::File> as handle and the file's
@@ -186,7 +179,6 @@ name as name.
         body => '....'
     });
     $c->stash->{entry}=$entry;
-
 
 And Place the following in your TT template
 
@@ -217,13 +209,6 @@ sub _file_column_callback {}
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

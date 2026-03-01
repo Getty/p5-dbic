@@ -1,6 +1,6 @@
 package # hide from PAUSE
     DBIC::Relationship::HasMany;
-
+# ABSTRACT: has_many relationship declaration
 use strict;
 use warnings;
 use Try::Tiny;

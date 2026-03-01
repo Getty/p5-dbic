@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Sybase::ASE::NoBindVars;
+# ABSTRACT: Storage::DBI subclass for Sybase ASE without placeholder support
 
 use warnings;
 use strict;
@@ -64,11 +65,6 @@ sub _prep_interpolated_value {
 
 1;
 
-=head1 NAME
-
-DBIC::Storage::DBI::Sybase::ASE::NoBindVars - Storage::DBI subclass for
-Sybase ASE without placeholder support
-
 =head1 DESCRIPTION
 
 If you're using this driver then your version of Sybase or the libraries you
@@ -99,9 +95,3 @@ interpolation renders it useless.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

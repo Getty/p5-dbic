@@ -1,6 +1,6 @@
 package # hide from the pauses
   DBIC::ResultSource::RowParser::Util;
-
+# ABSTRACT: Row parsing utility functions
 use strict;
 use warnings;
 
@@ -224,7 +224,6 @@ EOS
   __wrap_in_strictured_scope($parser_src);
 }
 
-
 # the collapsing nested structure recursor
 sub __visit_infmap_collapse {
   my $args = {%{ shift() }};
@@ -241,7 +240,6 @@ sub __visit_infmap_collapse {
     }
   }
 
-
   if ($args->{hri_style}) {
     delete $my_cols->{$_} for grep { $rel_cols->{$_} } keys %$my_cols;
   }
@@ -252,13 +250,11 @@ sub __visit_infmap_collapse {
   $me_struct = sprintf( '[ %s ]', $me_struct||'' )
     unless $args->{hri_style};
 
-
   my $node_key = $args->{collapse_map}->{-custom_node_key} || join ('', map
     { "{'\xFF__IDVALPOS__${_}__\xFF'}" }
     @{$args->{collapse_map}->{-identifying_columns}}
   );
   my $node_idx_slot = sprintf '$collapse_idx[%d]%s', $cur_node_idx, $node_key;
-
 
   my @src;
 

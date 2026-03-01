@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::ODBC::Microsoft_SQL_Server;
+# ABSTRACT: Support specific to Microsoft SQL Server over ODBC
 use strict;
 use warnings;
 
@@ -15,11 +16,6 @@ use namespace::clean;
 __PACKAGE__->mk_group_accessors(simple => qw/
   _using_dynamic_cursors
 /);
-
-=head1 NAME
-
-DBIC::Storage::DBI::ODBC::Microsoft_SQL_Server - Support specific
-to Microsoft SQL Server over ODBC
 
 =head1 DESCRIPTION
 
@@ -311,13 +307,6 @@ sub connect_call_use_server_cursors {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

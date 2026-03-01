@@ -1,6 +1,6 @@
 package # hide from PAUSE
   DBIC::Storage::DBI::Replicated::Types;
-
+# ABSTRACT: Type constraints for replicated storage
 # DBIC::Storage::DBI::Replicated::Types - Types used internally by
 # L<DBIC::Storage::DBI::Replicated>
 

@@ -1,4 +1,5 @@
 package DBIC::ResultSource;
+# ABSTRACT: Result source object
 
 use strict;
 use warnings;
@@ -31,10 +32,6 @@ __PACKAGE__->mk_group_accessors(component_class => qw/
 
 __PACKAGE__->mk_classdata( sqlt_deploy_callback => 'default_sqlt_deploy_hook' );
 
-=head1 NAME
-
-DBIC::ResultSource - Result source object
-
 =head1 SYNOPSIS
 
   # Create a table based result source, in a result class.
@@ -61,7 +58,6 @@ DBIC::ResultSource - Result source object
   __PACKAGE__->result_source_instance->view_definition(
       "SELECT cdid, artist, title FROM cd WHERE year ='2000'"
       );
-
 
 =head1 DESCRIPTION
 
@@ -669,7 +665,6 @@ sub _single_pri_col_or_die {
   return $pri;
 }
 
-
 =head2 sequence
 
 Manually define the correct sequence for your table, to avoid the overhead
@@ -695,7 +690,6 @@ sub sequence {
   $_->{sequence} = $seq
     for values %{ $self->columns_info (\@pks) };
 }
-
 
 =head2 add_unique_constraint
 
@@ -2170,7 +2164,6 @@ sub _resolve_relationship_condition {
       map { "'$_'" } @nonvalues
     )) if @nonvalues;
 
-
     $ret->{inferred_values} ||= {};
 
     $ret->{inferred_values}{$_} = $args->{infer_values_based_on}{$_}
@@ -2413,13 +2406,6 @@ should not be used.  It will be removed before 1.0.
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

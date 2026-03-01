@@ -1,6 +1,6 @@
 package # hide from PAUSE
     DBIC::Relationship::Helpers;
-
+# ABSTRACT: Relationship helper methods
 use strict;
 use warnings;
 

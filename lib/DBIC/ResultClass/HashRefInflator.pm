@@ -1,11 +1,8 @@
 package DBIC::ResultClass::HashRefInflator;
+# ABSTRACT: Get raw hashrefs from a resultset
 
 use strict;
 use warnings;
-
-=head1 NAME
-
-DBIC::ResultClass::HashRefInflator - Get raw hashrefs from a resultset
 
 =head1 SYNOPSIS
 
@@ -138,9 +135,3 @@ The returned hash contains the raw database values.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

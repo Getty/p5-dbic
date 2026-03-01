@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Replicated;
+# ABSTRACT: BETA Replicated database support
 
 BEGIN {
   use DBIC;
@@ -19,10 +20,6 @@ use Context::Preserve 'preserve_context';
 use Try::Tiny;
 
 use namespace::clean -except => 'meta';
-
-=head1 NAME
-
-DBIC::Storage::DBI::Replicated - BETA Replicated database support
 
 =head1 SYNOPSIS
 
@@ -155,7 +152,6 @@ has 'pool_args' => (
   lazy=>1,
   default=>sub { {} },
 );
-
 
 =head2 balancer_type
 
@@ -435,8 +431,6 @@ has 'write_handler' => (
   lazy_build=>1,
   handles=>$method_dispatch->{writer},
 );
-
-
 
 has _master_connect_info_opts =>
   (is => 'rw', isa => HashRef, default => sub { {} });
@@ -1115,13 +1109,6 @@ using the Schema clone method.
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

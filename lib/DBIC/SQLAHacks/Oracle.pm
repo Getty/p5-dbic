@@ -1,6 +1,6 @@
 package # Hide from PAUSE
   DBIC::SQLAHacks::Oracle;
-
+# ABSTRACT: Deprecated Oracle SQL customizations
 use warnings;
 use strict;
 

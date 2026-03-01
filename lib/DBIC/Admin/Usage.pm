@@ -1,6 +1,6 @@
 package     # hide from PAUSE
     DBIC::Admin::Usage;
-
+# ABSTRACT: Usage output for DBIC admin tool
 use warnings;
 use strict;
 
@@ -20,8 +20,6 @@ sub set_simple {
     $value =~ s/%c/$prog_name/g;
     $self->next::method($field, $value);
 }
-
-
 
 # This returns the usage formatted as a pod document
 sub pod {
@@ -47,7 +45,6 @@ sub pod_authorlic_text {
     '=cut',
   );
 }
-
 
 sub pod_option_text {
   my ($self) = @_;

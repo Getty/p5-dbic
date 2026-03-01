@@ -1,11 +1,8 @@
 package DBIC::SQLMaker::ClassicExtensions;
+# ABSTRACT: Class containing generic enhancements to SQL::Abstract
 
 use strict;
 use warnings;
-
-=head1 NAME
-
-DBIC::SQLMaker::ClassicExtensions - Class containing generic enhancements to SQL::Abstract
 
 =head1 DESCRIPTION
 
@@ -116,7 +113,6 @@ sub _where_op_NEST {
 sub select {
   my ($self, $table, $fields, $where, $rs_attrs, $limit, $offset) = @_;
 
-
   ($fields, @{$self->{select_bind}}) = $self->_recurse_fields($fields);
 
   if (defined $offset) {
@@ -132,7 +128,6 @@ sub select {
   elsif ($offset) {
     $limit = $self->__max_int;
   }
-
 
   my ($sql, @bind);
   if ($limit) {
@@ -285,7 +280,6 @@ sub _recurse_fields {
     $self->throw_exception( $ref . qq{ unexpected in _recurse_fields()} );
   }
 }
-
 
 # this used to be a part of _order_by but is broken out for clarity.
 # What we have been doing forever is hijacking the $order arg of
@@ -541,7 +535,6 @@ sub _where_op_multicolumn_in {
   \[ join( ' IN ', shift @$$lhs, shift @$$rhs ), @$$lhs, @$$rhs ];
 }
 
-
 ###
 ### Code that mostly used to be in DBIC::SQLMaker::LimitDialects
 ###
@@ -685,7 +678,6 @@ sub _RowNum {
   my $qalias = $self->_quote ($rs_attrs->{alias});
   my $idx_name = $self->_quote ('rownum__index');
   my $order_group_having = $self->_parse_rs_attrs($rs_attrs);
-
 
   # if no offset (e.g. first page) - we can skip one of the subqueries
   if (! $offset) {
@@ -887,7 +879,6 @@ sub _FetchFirst {
     $rows,
   ) if $offset;
 
-
   $sql = sprintf ('SELECT %s FROM ( %s ) %s %s',
     $lim->{selection_outer},
     $sql,
@@ -1052,7 +1043,6 @@ sub _GenericSubQ {
 
   my $group_having_sql = $self->_parse_rs_attrs($rs_attrs);
 
-
   return sprintf ("
 SELECT $sq_attrs->{selection_outer}
   FROM (
@@ -1066,7 +1056,6 @@ $inner_order_sql
     $count_tbl_alias,
   ));
 }
-
 
 # !!! THIS IS ALSO HORRIFIC !!! /me ashamed
 #
@@ -1143,7 +1132,6 @@ sub _subqueried_limit_attrs {
     }
   }
 
-
   # re-alias and remove any name separators from aliases,
   # unless we are dealing with the current source alias
   # (which will transcend the subqueries as it is necessary
@@ -1203,13 +1191,6 @@ sub _unqualify_colname {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

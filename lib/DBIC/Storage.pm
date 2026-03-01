@@ -1,4 +1,5 @@
 package DBIC::Storage;
+# ABSTRACT: Generic Storage Handler
 
 use strict;
 use warnings;
@@ -25,10 +26,6 @@ __PACKAGE__->mk_group_accessors(component_class => 'cursor_class');
 __PACKAGE__->cursor_class('DBIC::Cursor');
 
 sub cursor { shift->cursor_class(@_); }
-
-=head1 NAME
-
-DBIC::Storage - Generic Storage Handler
 
 =head1 DESCRIPTION
 
@@ -328,7 +325,6 @@ sub _svp_generate_name {
   my ($self) = @_;
   return 'savepoint_'.scalar(@{ $self->{'savepoints'} });
 }
-
 
 =head2 svp_release
 
@@ -680,13 +676,6 @@ DBI and a subclass of SQL::Abstract ( or similar )
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

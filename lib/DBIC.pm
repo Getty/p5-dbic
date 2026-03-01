@@ -1,4 +1,5 @@
 package DBIC;
+# ABSTRACT: Extensible and flexible object <-> relational mapper.
 
 use strict;
 use warnings;
@@ -95,10 +96,6 @@ __END__
 # so all is well
 #
 =encoding UTF-8
-
-=head1 NAME
-
-DBIC - Extensible and flexible object <-> relational mapper.
 
 =head1 WHERE TO START READING
 
@@ -294,27 +291,3 @@ accessible at the following locations:
 
 =back
 
-=head1 AUTHORS
-
-Even though a large portion of the source I<appears> to be written by just a
-handful of people, this library continues to remain a collaborative effort -
-perhaps one of the most successful such projects on L<CPAN|http://cpan.org>.
-It is important to remember that ideas do not always result in a direct code
-contribution, but deserve acknowledgement just the same. Time and time again
-the seemingly most insignificant questions and suggestions have been shown
-to catalyze monumental improvements in consistency, accuracy and performance.
-
-=for comment this line is replaced with the author list at dist-building time
-
-The canonical source of authors and their details is the F<AUTHORS> file at
-the root of this distribution (or repository). The canonical source of
-per-line authorship is the L<git repository|/HOW TO CONTRIBUTE> history
-itself.
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright (c) 2005 by mst, castaway, ribasushi, and other DBIC
-L</AUTHORS> as listed above and in F<AUTHORS>.
-
-This library is free software and may be distributed under the same terms
-as perl5 itself. See F<LICENSE> for the complete licensing terms.

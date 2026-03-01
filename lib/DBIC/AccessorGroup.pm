@@ -1,4 +1,5 @@
 package DBIC::AccessorGroup;
+# ABSTRACT: See Class::Accessor::Grouped
 
 use strict;
 use warnings;
@@ -34,10 +35,6 @@ sub set_component_class {
 
 1;
 
-=head1 NAME
-
-DBIC::AccessorGroup - See Class::Accessor::Grouped
-
 =head1 SYNOPSIS
 
 =head1 DESCRIPTION
@@ -47,12 +44,5 @@ This class now exists in its own right on CPAN as Class::Accessor::Grouped
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut

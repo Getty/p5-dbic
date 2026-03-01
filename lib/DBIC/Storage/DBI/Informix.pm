@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Informix;
+# ABSTRACT: Base Storage Class for Informix Support
 use strict;
 use warnings;
 
@@ -15,12 +16,7 @@ __PACKAGE__->datetime_parser_type (
   'DBIC::Storage::DBI::Informix::DateTime::Format'
 );
 
-
 __PACKAGE__->mk_group_accessors('simple' => '__last_insert_id');
-
-=head1 NAME
-
-DBIC::Storage::DBI::Informix - Base Storage Class for Informix Support
 
 =head1 DESCRIPTION
 
@@ -172,13 +168,6 @@ sub format_date {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

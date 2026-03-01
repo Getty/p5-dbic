@@ -1,6 +1,6 @@
 package # hide from PAUSE
     DBIC::ResultSourceProxy;
-
+# ABSTRACT: Proxy methods for ResultSource access
 use strict;
 use warnings;
 
@@ -23,7 +23,6 @@ sub set_inherited_ro_instance {
   $self->set_inherited(@_);
 }
 
-
 sub add_columns {
   my ($class, @cols) = @_;
   my $source = $class->result_source_instance;
@@ -38,14 +37,12 @@ sub add_columns {
 
 sub add_column { shift->add_columns(@_) }
 
-
 sub add_relationship {
   my ($class, $rel, @rest) = @_;
   my $source = $class->result_source_instance;
   $source->add_relationship($rel => @rest);
   $class->register_relationship($rel => $source->relationship_info($rel));
 }
-
 
 # legacy resultset_class accessor, seems to be used by cdbi only
 sub iterator_class { shift->result_source_instance->resultset_class(@_) }

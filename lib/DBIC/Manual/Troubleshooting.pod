@@ -1,6 +1,5 @@
-=head1 NAME
-
-DBIC::Manual::Troubleshooting - Got a problem? Shoot it.
+# PODNAME: DBIC::Manual::Troubleshooting
+# ABSTRACT: Got a problem? Shoot it.
 
 =head2  "Can't locate storage blabla"
 
@@ -161,9 +160,3 @@ The solution is to use the smallest practical value for LongReadLen.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

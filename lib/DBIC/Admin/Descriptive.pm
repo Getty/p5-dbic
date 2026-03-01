@@ -1,6 +1,6 @@
 package     # hide from PAUSE
     DBIC::Admin::Descriptive;
-
+# ABSTRACT: Getopt::Long::Descriptive integration for DBIC admin
 use warnings;
 use strict;
 

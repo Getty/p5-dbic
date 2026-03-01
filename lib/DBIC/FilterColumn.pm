@@ -1,4 +1,5 @@
 package DBIC::FilterColumn;
+# ABSTRACT: Automatically convert column data
 use strict;
 use warnings;
 
@@ -197,10 +198,6 @@ sub new {
 
 __END__
 
-=head1 NAME
-
-DBIC::FilterColumn - Automatically convert column data
-
 =head1 SYNOPSIS
 
 In your Schema or DB class add "FilterColumn" to the top of the component list.
@@ -219,7 +216,6 @@ Set up filters for the columns you want to convert.
  sub from_pennies { $_[1] / 100 }
 
  1;
-
 
 =head1 DESCRIPTION
 
@@ -286,9 +282,3 @@ passing the database value through to perl does the right thing.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

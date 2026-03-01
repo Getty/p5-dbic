@@ -1,6 +1,6 @@
 package # hide from PAUSE
     DBIC::Admin::Types;
-
+# ABSTRACT: Type constraints for DBIC::Admin
 # Workaround for https://rt.cpan.org/Public/Bug/Display.html?id=83336
 use warnings;
 use strict;

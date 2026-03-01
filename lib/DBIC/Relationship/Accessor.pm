@@ -1,6 +1,6 @@
 package # hide from PAUSE
     DBIC::Relationship::Accessor;
-
+# ABSTRACT: Relationship accessor generation
 use strict;
 use warnings;
 use DBIC::Carp;

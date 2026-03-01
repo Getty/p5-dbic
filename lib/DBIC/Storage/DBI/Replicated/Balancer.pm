@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Replicated::Balancer;
+# ABSTRACT: A Software Load Balancer
 
 use Moose::Role;
 requires 'next_storage';
@@ -6,10 +7,6 @@ use MooseX::Types::Moose qw/Int/;
 use DBIC::Storage::DBI::Replicated::Pool;
 use DBIC::Storage::DBI::Replicated::Types qw/DBICStorageDBI/;
 use namespace::clean -except => 'meta';
-
-=head1 NAME
-
-DBIC::Storage::DBI::Replicated::Balancer - A Software Load Balancer
 
 =head1 SYNOPSIS
 
@@ -246,13 +243,6 @@ sub _get_forced_pool {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

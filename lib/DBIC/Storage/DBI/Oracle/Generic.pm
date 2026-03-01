@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Oracle::Generic;
+# ABSTRACT: Oracle Support for DBIC
 
 use strict;
 use warnings;
@@ -16,10 +17,6 @@ __PACKAGE__->sql_maker_class('DBIC::SQLMaker::Oracle');
 __PACKAGE__->datetime_parser_type('DateTime::Format::Oracle');
 
 sub __cache_queries_with_max_lob_parts { 2 }
-
-=head1 NAME
-
-DBIC::Storage::DBI::Oracle::Generic - Oracle Support for DBIC
 
 =head1 SYNOPSIS
 
@@ -699,7 +696,6 @@ Following additional attributes can be used in resultsets.
 A hashref of conditions used to specify the relationship between parent rows
 and child rows of the hierarchy.
 
-
   connect_by => { parentid => 'prior personid' }
 
   # adds a connect by statement to the query:
@@ -710,7 +706,6 @@ and child rows of the hierarchy.
   # CONNECT BY
   #     parentid = prior persionid
 
-
   connect_by_nocycle => { parentid => 'prior personid' }
 
   # adds a connect by statement to the query:
@@ -720,7 +715,6 @@ and child rows of the hierarchy.
   #     person me
   # CONNECT BY NOCYCLE
   #     parentid = prior persionid
-
 
 =head2 start_with
 
@@ -771,13 +765,6 @@ It uses the same syntax as L<DBIC::ResultSet/order_by>
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

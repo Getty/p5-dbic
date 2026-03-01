@@ -1,4 +1,5 @@
 package DBIC::StartupCheck;
+# ABSTRACT: Run environment checks on startup
 
 use strict;
 use warnings;
@@ -6,10 +7,6 @@ use warnings;
 1;
 
 __END__
-
-=head1 NAME
-
-DBIC::StartupCheck - Run environment checks on startup
 
 =head1 SYNOPSIS
 
@@ -38,9 +35,3 @@ have nothing to worry about.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

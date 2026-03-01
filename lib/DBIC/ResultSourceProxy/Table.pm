@@ -1,4 +1,5 @@
 package DBIC::ResultSourceProxy::Table;
+# ABSTRACT: provides a classdata table object and method proxies
 
 use strict;
 use warnings;
@@ -47,11 +48,6 @@ sub _init_result_source_instance {
 
     return $table;
 }
-
-=head1 NAME
-
-DBIC::ResultSourceProxy::Table - provides a classdata table
-object and method proxies
 
 =head1 SYNOPSIS
 
@@ -132,15 +128,7 @@ L<DBIC::ResultSource/add_column>
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
-
 =cut
 
 1;
-
 

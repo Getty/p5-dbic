@@ -1,14 +1,10 @@
 package DBIC::Storage::DBI::IdentityInsert;
+# ABSTRACT: Storage Component for Sybase ASE and MSSQL for Identity Inserts / Updates
 
 use strict;
 use warnings;
 use base 'DBIC::Storage::DBI';
 use mro 'c3';
-
-=head1 NAME
-
-DBIC::Storage::DBI::IdentityInsert - Storage Component for Sybase ASE and
-MSSQL for Identity Inserts / Updates
 
 =head1 DESCRIPTION
 
@@ -52,13 +48,6 @@ EOS
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

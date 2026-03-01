@@ -1,6 +1,6 @@
 package # hide from PAUSE
     DBIC::Componentised;
-
+# ABSTRACT: Component loading and management
 use strict;
 use warnings;
 

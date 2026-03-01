@@ -1,7 +1,5 @@
-
-=head1 NAME
-
-DBIC::Manual::Reading - How to read and write DBIC POD.
+# PODNAME: DBIC::Manual::Reading
+# ABSTRACT: How to read and write DBIC POD.
 
 =head1 DESCRIPTION
 
@@ -183,9 +181,3 @@ Examples and explaining paragraphs can be repeated as necessary.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

@@ -1,6 +1,6 @@
 package # hide from PAUSE
     DBIC::Relationship::ManyToMany;
-
+# ABSTRACT: many_to_many relationship bridge
 use strict;
 use warnings;
 

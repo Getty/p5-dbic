@@ -1,6 +1,6 @@
 package # Hide from PAUSE
   DBIC::SQLAHacks::MySQL;
-
+# ABSTRACT: Deprecated MySQL SQL customizations
 use warnings;
 use strict;
 

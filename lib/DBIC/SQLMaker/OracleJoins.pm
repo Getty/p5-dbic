@@ -1,4 +1,5 @@
 package DBIC::SQLMaker::OracleJoins;
+# ABSTRACT: Pre-ANSI Joins-via-Where-Clause Syntax
 
 use warnings;
 use strict;
@@ -93,7 +94,6 @@ sub _recurse_oracle_joins {
       @{$on->{-and}} == 1
     );
 
-
     push @where, map { \do {
         my ($sql) = $self->_recurse_where({
           # FIXME - more borkage, more or less a copy of the kludge in ::SQLMaker::_join_condition()
@@ -117,10 +117,6 @@ sub _recurse_oracle_joins {
 1;
 
 __END__
-
-=head1 NAME
-
-DBIC::SQLMaker::OracleJoins - Pre-ANSI Joins-via-Where-Clause Syntax
 
 =head1 PURPOSE
 
@@ -178,9 +174,3 @@ Does not support full outer joins (however neither really does DBIC itself)
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

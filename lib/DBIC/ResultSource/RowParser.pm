@@ -1,6 +1,6 @@
 package # hide from the pauses
   DBIC::ResultSource::RowParser;
-
+# ABSTRACT: Row inflation logic for ResultSources
 use strict;
 use warnings;
 
@@ -143,7 +143,6 @@ sub _mk_row_parser {
     $check_null_columns,
   );
 }
-
 
 # Takes an arrayref selection list and generates a collapse-map representing
 # row-object fold-points. Every relationship is assigned a set of unique,

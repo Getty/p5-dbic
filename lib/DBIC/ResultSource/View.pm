@@ -1,4 +1,5 @@
 package DBIC::ResultSource::View;
+# ABSTRACT: ResultSource object representing a view
 
 use strict;
 use warnings;
@@ -9,10 +10,6 @@ use base qw/DBIC/;
 __PACKAGE__->load_components(qw/ResultSource/);
 __PACKAGE__->mk_group_accessors(
     'simple' => qw(is_virtual view_definition deploy_depends_on) );
-
-=head1 NAME
-
-DBIC::ResultSource::View - ResultSource object representing a view
 
 =head1 SYNOPSIS
 
@@ -174,13 +171,6 @@ sub new {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

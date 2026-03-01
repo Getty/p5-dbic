@@ -1,4 +1,5 @@
 package SQL::Translator::Parser::DBIC;
+# ABSTRACT: Create a SQL::Translator schema from a DBIC::Schema instance
 
 # AUTHOR: Jess Robinson
 
@@ -91,7 +92,6 @@ sub parse {
         }
         @monikers = grep { $sources->{$_} } @monikers;
     }
-
 
     my(%table_monikers, %view_monikers);
     for my $moniker (@monikers){
@@ -374,7 +374,6 @@ EOW
         $source->_invoke_sqlt_deploy_hook($view);
     }
 
-
     if ($dbicschema->can('sqlt_deploy_hook')) {
       $dbicschema->sqlt_deploy_hook($schema);
     }
@@ -434,11 +433,6 @@ sub _resolve_deps {
 }
 
 1;
-
-=head1 NAME
-
-SQL::Translator::Parser::DBIC - Create a SQL::Translator schema
-from a DBIC::Schema instance
 
 =head1 SYNOPSIS
 
@@ -532,9 +526,3 @@ L<SQL::Translator>, L<DBIC::Schema>
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

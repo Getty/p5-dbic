@@ -1,6 +1,6 @@
 package # hide from PAUSE
     DBIC::Relationship::CascadeActions;
-
+# ABSTRACT: Cascade delete and update actions
 use strict;
 use warnings;
 use DBIC::Carp;

@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Sybase::ASE;
+# ABSTRACT: Sybase ASE SQL Server support for DBIC
 
 use strict;
 use warnings;
@@ -31,7 +32,6 @@ __PACKAGE__->mk_group_accessors('simple' =>
     /
 );
 
-
 my @also_proxy_to_extra_storages = qw/
   connect_call_set_auto_cast auto_cast connect_call_blob_setup
   connect_call_datetime_setup
@@ -39,11 +39,6 @@ my @also_proxy_to_extra_storages = qw/
   disconnect _connect_info _sql_maker _sql_maker_opts disable_sth_caching
   auto_savepoint unsafe cursor_class debug debugobj schema
 /;
-
-=head1 NAME
-
-DBIC::Storage::DBI::Sybase::ASE - Sybase ASE SQL Server support for
-DBIC
 
 =head1 SYNOPSIS
 
@@ -331,7 +326,6 @@ sub _native_data_type {
 
   return uc($TYPE_MAPPING{$type} || $type);
 }
-
 
 sub _execute {
   my $self = shift;
@@ -904,7 +898,6 @@ sub connect_call_datetime_setup {
   }
 }
 
-
 sub _exec_txn_begin {
   my $self = shift;
 
@@ -1201,9 +1194,3 @@ bulk_insert using prepare_cached (see comments.)
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

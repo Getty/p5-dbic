@@ -1,4 +1,5 @@
 package DBIC::SQLMaker;
+# ABSTRACT: An SQL::Abstract-based SQL maker class
 
 use strict;
 use warnings;
@@ -15,10 +16,6 @@ use base qw(
 1;
 
 __END__
-
-=head1 NAME
-
-DBIC::SQLMaker - An SQL::Abstract-based SQL maker class
 
 =head1 DESCRIPTION
 
@@ -42,9 +39,3 @@ including L<SQL::Abstract::Classic> for backwards compatibility.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

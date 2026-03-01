@@ -1,6 +1,6 @@
 package # Hide from PAUSE
   DBIC::SQLAHacks::SQLite;
-
+# ABSTRACT: Deprecated SQLite SQL customizations
 use warnings;
 use strict;
 

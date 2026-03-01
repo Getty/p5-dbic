@@ -1,4 +1,5 @@
 package DBIC::Schema;
+# ABSTRACT: composable schemas
 
 use strict;
 use warnings;
@@ -19,10 +20,6 @@ __PACKAGE__->mk_classdata('storage');
 __PACKAGE__->mk_classdata('exception_action');
 __PACKAGE__->mk_classdata('stacktrace' => $ENV{DBIC_TRACE} || 0);
 __PACKAGE__->mk_classdata('default_resultset_attributes' => {});
-
-=head1 NAME
-
-DBIC::Schema - composable schemas
 
 =head1 SYNOPSIS
 
@@ -1366,7 +1363,6 @@ sub schema_version {
   return $version;
 }
 
-
 =head2 register_class
 
 =over 4
@@ -1523,17 +1519,9 @@ sub _unregister_source {
     }
 }
 
-
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

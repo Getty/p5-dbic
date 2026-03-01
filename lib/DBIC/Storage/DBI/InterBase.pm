@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::InterBase;
+# ABSTRACT: Driver for the Firebird RDBMS via L<DBD::InterBase>
 
 use strict;
 use warnings;
@@ -6,11 +7,6 @@ use base qw/DBIC::Storage::DBI::Firebird::Common/;
 use mro 'c3';
 use Try::Tiny;
 use namespace::clean;
-
-=head1 NAME
-
-DBIC::Storage::DBI::InterBase - Driver for the Firebird RDBMS via
-L<DBD::InterBase>
 
 =head1 DESCRIPTION
 
@@ -150,13 +146,6 @@ Alternately, use the L<ODBC|DBIC::Storage::DBI::ODBC::Firebird> driver.
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

@@ -1,6 +1,5 @@
-=head1 NAME
-
-DBIC::Manual::Glossary - Clarification of terms used.
+# PODNAME: DBIC::Manual::Glossary
+# ABSTRACT: Clarification of terms used.
 
 =head1 INTRODUCTION
 
@@ -159,9 +158,3 @@ the same table. (Yes. DBIC does mis-use this term.)
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

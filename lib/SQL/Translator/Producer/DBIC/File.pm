@@ -1,8 +1,5 @@
 package SQL::Translator::Producer::DBIC::File;
-
-=head1 NAME
-
-SQL::Translator::Producer::DBIC::File - DBIC file producer
+# ABSTRACT: DBIC file producer
 
 =head1 SYNOPSIS
 
@@ -19,13 +16,6 @@ Creates a DBIC::Schema for use with DBIC
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

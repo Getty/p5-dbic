@@ -1,11 +1,8 @@
 package DBIC::Ordered;
+# ABSTRACT: Modify the position of objects in an ordered list.
 use strict;
 use warnings;
 use base qw( DBIC );
-
-=head1 NAME
-
-DBIC::Ordered - Modify the position of objects in an ordered list.
 
 =head1 SYNOPSIS
 
@@ -757,7 +754,6 @@ sub _shift_siblings {
     }
 }
 
-
 # This method returns a resultset containing all members of the row
 # group (including the row itself).
 sub _group_rs {
@@ -900,9 +896,3 @@ could result in the position not being assigned correctly.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

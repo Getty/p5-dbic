@@ -1,4 +1,5 @@
 package DBIC::Core;
+# ABSTRACT: Core set of DBIC modules
 
 use strict;
 use warnings;
@@ -16,10 +17,6 @@ __PACKAGE__->load_components(qw/
 1;
 
 __END__
-
-=head1 NAME
-
-DBIC::Core - Core set of DBIC modules
 
 =head1 SYNOPSIS
 
@@ -54,9 +51,3 @@ in L<DBIC::Manual::ResultClass>.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.

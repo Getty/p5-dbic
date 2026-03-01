@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Replicated::Replicant;
+# ABSTRACT: A replicated DBI Storage Role
 
 use Moose::Role;
 requires qw/_query_start/;
@@ -7,10 +8,6 @@ use MooseX::Types::Moose qw/Bool Str/;
 use DBIC::Storage::DBI::Replicated::Types 'DBICStorageDBI';
 
 use namespace::clean -except => 'meta';
-
-=head1 NAME
-
-DBIC::Storage::DBI::Replicated::Replicant - A replicated DBI Storage Role
 
 =head1 SYNOPSIS
 
@@ -90,13 +87,6 @@ L<DBIC::Storage::DBI::Replicated>
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

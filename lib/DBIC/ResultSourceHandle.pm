@@ -1,4 +1,5 @@
 package DBIC::ResultSourceHandle;
+# ABSTRACT: Serializable pointers to ResultSource instances
 
 use strict;
 use warnings;
@@ -16,10 +17,6 @@ __PACKAGE__->mk_group_accessors('simple' => qw/schema source_moniker _detached_s
 
 # Schema to use when thawing.
 our $thaw_schema;
-
-=head1 NAME
-
-DBIC::ResultSourceHandle - Serializable pointers to ResultSource instances
 
 =head1 DESCRIPTION
 
@@ -131,13 +128,6 @@ sub STORABLE_thaw {
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

@@ -1,6 +1,6 @@
 package # hide from PAUSE
   DBIC::_Util;
-
+# ABSTRACT: Internal utility functions
 use warnings;
 use strict;
 
@@ -117,7 +117,6 @@ sub serialize ($) {
   nfreeze($_[0]);
 }
 
-
 my $seen_loud_screams;
 sub emit_loud_diag {
   my $args = { ref $_[0] eq 'HASH' ? %{$_[0]} : @_ };
@@ -173,7 +172,6 @@ sub emit_loud_diag {
   # not $msg - Carp will reapply the longmess on its own
   Carp::confess($args->{msg});
 }
-
 
 sub scope_guard (&) {
   croak 'Calling scope_guard() in void context makes no sense'

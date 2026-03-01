@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::DB2;
+# ABSTRACT: IBM DB2 support for DBIC
 
 use strict;
 use warnings;
@@ -58,10 +59,6 @@ sub _dbh_last_insert_id {
   return @res ? $res[0] : undef;
 }
 
-=head1 NAME
-
-DBIC::Storage::DBI::DB2 - IBM DB2 support for DBIC
-
 =head1 DESCRIPTION
 
 This class implements autoincrements for DB2, sets the limit dialect to
@@ -72,13 +69,6 @@ parser to L<DateTime::Format::DB2>.
 =head1 FURTHER QUESTIONS?
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
 
 =cut
 

@@ -1,6 +1,6 @@
 package # Hide from PAUSE
   DBIC::SQLMaker::MSSQL;
-
+# ABSTRACT: MSSQL-specific SQL generation
 use warnings;
 use strict;
 

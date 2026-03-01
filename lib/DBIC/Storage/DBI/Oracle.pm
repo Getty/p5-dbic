@@ -1,4 +1,5 @@
 package DBIC::Storage::DBI::Oracle;
+# ABSTRACT: Base class for Oracle driver
 
 use strict;
 use warnings;
@@ -20,10 +21,6 @@ sub _rebless {
 
 1;
 
-=head1 NAME
-
-DBIC::Storage::DBI::Oracle - Base class for Oracle driver
-
 =head1 DESCRIPTION
 
 This class simply provides a mechanism for discovering and loading a sub-class
@@ -42,9 +39,3 @@ to your Schema class.
 
 Check the list of L<additional DBIC resources|DBIC/GETTING HELP/SUPPORT>.
 
-=head1 COPYRIGHT AND LICENSE
-
-This module is free software L<copyright|DBIC/COPYRIGHT AND LICENSE>
-by the L<DBIC (DBIC) authors|DBIC/AUTHORS>. You can
-redistribute it and/or modify it under the same terms as the
-L<DBIC library|DBIC/COPYRIGHT AND LICENSE>.
