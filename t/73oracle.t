@@ -64,12 +64,6 @@ $ENV{NLS_LANG} = "AMERICAN";
 
 DBICTest::Schema->load_classes('ArtistFQN');
 
-# This is in Core now, but it's here just to test that it doesn't break
-DBICTest::Schema::Artist->load_components('PK::Auto');
-# These are compat shims for PK::Auto...
-DBICTest::Schema::CD->load_components('PK::Auto::Oracle');
-DBICTest::Schema::Track->load_components('PK::Auto::Oracle');
-
 
 # check if we indeed do support stuff
 my $v = do {

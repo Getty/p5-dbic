@@ -72,8 +72,6 @@ for my $storage_type (@test_storages) {
 
   $dbh->do("CREATE TABLE artist (artistid INT IDENTITY PRIMARY KEY, name VARCHAR(100), rank INT DEFAULT '13', charfield CHAR(10) NULL);");
   $dbh->do("CREATE TABLE cd (cdid INT IDENTITY PRIMARY KEY, artist INT,  title VARCHAR(100), year VARCHAR(100), genreid INT NULL, single_track INT NULL);");
-# Just to test compat shim, Auto is in Core
-  $schema->class('Artist')->load_components('PK::Auto::MSSQL');
 
 # Test PK
   my $new = $schema->resultset('Artist')->create( { name => 'foo' } );

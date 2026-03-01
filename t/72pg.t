@@ -641,8 +641,6 @@ sub drop_test_schema {
 sub run_apk_tests {
     my $schema = shift;
 
-    # This is in Core now, but it's here just to test that it doesn't break
-    $schema->class('Artist')->load_components('PK::Auto');
     cmp_ok( $schema->resultset('Artist')->count, '==', 0, 'this should start with an empty artist table');
 
     # test that auto-pk also works with the defined search path by

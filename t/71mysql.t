@@ -58,9 +58,6 @@ $dbh->do("CREATE TABLE books (id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY, so
   is ($schema->storage->sqlt_type, 'MySQL', 'sqlt_type correct pre-connection');
 }
 
-# This is in Core now, but it's here just to test that it doesn't break
-$schema->class('Artist')->load_components('PK::Auto');
-
 # test primary key handling
 my $new = $schema->resultset('Artist')->create({ name => 'foo' });
 ok($new->artistid, "Auto-PK worked");
