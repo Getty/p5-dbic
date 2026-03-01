@@ -58,16 +58,8 @@ if (length $ENV{PATH}) {
   ) =~ /\A(.+)\z/;
 }
 
-# no git-check when smoking a PR
-if (
-  (
-    ! $ENV{TRAVIS_PULL_REQUEST}
-      or
-    $ENV{TRAVIS_PULL_REQUEST} eq "false"
-  )
-    and
-  -d '.git'
-) {
+# git-check only when we have a .git dir (not in a release tarball)
+if ( -d '.git' ) {
 
   binmode (Test::More->builder->$_, ':utf8') for qw/output failure_output todo_output/;
 

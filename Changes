@@ -1,5 +1,21 @@
 Revision history for DBIC
 
+  (next release)
+    * New Features
+        - Complete namespace rename from DBIx::Class to DBIC
+        - Replace SQL::Abstract::Classic with SQL::Abstract
+        - Add DBIC::Storage::DBI::MariaDB as proper storage class
+        - Integrate DBIx::Class::Helpers into DBIC core
+        - Restore Firebird/InterBase and Informix database support
+        - Convert build system from Module::Install to Dist::Zilla
+        - Add Pod::Weaver with custom weaver.ini
+
+    * Removals
+        - Remove Class::DBI compatibility layer (CDBICompat)
+        - Remove legacy/obsolete database driver stubs
+        - Remove Travis CI infrastructure (defunct)
+        - Remove Module::Install author-mode infrastructure
+
     * Fixes
         - Adjust tests to account for DBD::SQLite's column_info() no longer
           being case-preserving in recent versions
